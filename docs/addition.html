@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rspec HTML Reports - Overview</title>
+  <title>Rspec HTML Reports - Addition</title>
 
   <!-- Bootstrap -->
   <link href="resources/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -24,6 +24,9 @@
           font-size: 14px;
       }
 
+      .spacer {
+        margin-left: 10px;
+      }
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 .highlight .cm {
@@ -250,8 +253,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <p class="text-center" style="font-size:2em;">Overview</p>
             </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li><a href="overview.html">Overview</a></li>
+              </ul>
+            </div>
+
           </div>
         </div>
       </div>
@@ -259,17 +268,17 @@
   </div>
 
   <div class="row">
+    <div class="col-lg-12">
+      <div class="col-md-4">
+        <div class="panel panel-default">
 
-    <div class="col-md-4">
-      <div class="panel panel-default">
-
-        <div class="panel-heading">Group Summary</div>
-        <div class="panel-body">
-          <span class="pull-right">4 Examples</span>
-          <canvas id="pieChart" width="300" height="300"></canvas>
+          <div class="panel-heading">Group Summary</div>
+          <div class="panel-body">
+            <span class="pull-right"> Examples</span>
+            <canvas id="pieChart" width="300" height="300"></canvas>
+          </div>
         </div>
       </div>
-
     </div>
 
   <div class="row">
@@ -280,68 +289,58 @@
         <thead>
         <tr>
           <th>#</th>
-          <th>Group</th>
+          <th>Example</th>
           <th>Duration</th>
-          <th class="warning">Pending</th>
-          <th class="danger">Failed</th>
-          <th class="success">Passed</th>
           <th>Status</th>
         </tr>
         </thead>
         <tbody>
         
-        
             <tr>
-              <td>1</td>
-              <td>
-                <a href="addition.html">Addition</a>
+              <td id="example_1">1</td>
+              <td width="100%">
+                <div>
+                      <div class="panel panel-success">
+                        <div class="panel-heading">
+                          <h3 class="panel-title pull-left"> Addition → add two numbers</h3>
+                          
+                            <a href="#example_1" class="btn btn-xs btn-default spacer pull-right" onclick="toggler('screenrecord_1');">Screen Record</a>
+                          
+                          
+                          <div class="clearfix"></div>
+                        </div>
+
+
+                        
+                        <!-- SPEC BLOCK -->
+                          
+
+                        <!--  SCREENSHOT BLOCK -->
+                          
+
+                          <!--  SCREENRECORD BLOCK -->
+                          
+                            <div id="screenrecord_1" class="panel-body" style="display:none">
+                              <div class="col-md-4">
+                                <video controls width="250">
+                                  <source src=./screenrecords/screenrecord_1.mp4 type="video/mp4">
+                                  Your browser does not support HTML5 video.
+                                </video>
+                              </div>
+                            </div>
+                          
+                        </div>
+
+                        
+                      </div>
+                </div>
+                <div>
+                  
+                </div>
               </td>
-              <td>31.10742</td>
-              <td class="warning"><span>0</span></td>
-              <td class="danger"><span>0</span></td>
-              <td class="success"><span>1</span></td>
+              <td>15.55371</td>
               <td><span class="label label-success">passed</span></td>
             </tr>
-        
-        
-            <tr>
-              <td>2</td>
-              <td>
-                <a href="division.html">Division</a>
-              </td>
-              <td>30.32206</td>
-              <td class="warning"><span>0</span></td>
-              <td class="danger"><span>0</span></td>
-              <td class="success"><span>1</span></td>
-              <td><span class="label label-success">passed</span></td>
-            </tr>
-        
-        
-            <tr>
-              <td>3</td>
-              <td>
-                <a href="multiplication.html">Multiplication</a>
-              </td>
-              <td>30.27946</td>
-              <td class="warning"><span>0</span></td>
-              <td class="danger"><span>0</span></td>
-              <td class="success"><span>1</span></td>
-              <td><span class="label label-success">passed</span></td>
-            </tr>
-        
-        
-            <tr>
-              <td>4</td>
-              <td>
-                <a href="subtraction.html">Subtraction</a>
-              </td>
-              <td>34.17462</td>
-              <td class="warning"><span>0</span></td>
-              <td class="danger"><span>1</span></td>
-              <td class="success"><span>0</span></td>
-              <td><span class="label label-danger">failed</span></td>
-            </tr>
-        
         
         </tbody>
       </table>
@@ -352,33 +351,36 @@
 </div>
 
 <script type="text/javascript">
-
   var pieCtx = document.getElementById("pieChart");
 
   var pieChart = new Chart(pieCtx, {
     type: 'doughnut',
     data: {
-        labels: ["Passed", "Failed", "Pending"],
-        datasets: [{
-          label: 'Examples',
-          data: [3, 1, 0],
+      labels: ["Passed", "Failed", "Pending"],
+      datasets: [{
+        label: 'Examples',
+        data: [1, 0, 0],
 
-          backgroundColor: [
-            '#3c9a5f',
-            '#ea2f10',
-            '#e99002'
+        backgroundColor: [
+          '#3c9a5f',
+          '#ea2f10',
+          '#e99002'
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)'
           ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)'
-          ],
-          borderWidth: 1
-        }]
+        borderWidth: 1
+      }]
     },
   });
 
+  function toggler(divId) {
+    $("#" + divId).slideToggle();
+  }
 </script>
+
 
 </body>
 </html>

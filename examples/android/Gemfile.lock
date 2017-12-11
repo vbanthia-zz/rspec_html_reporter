@@ -1,0 +1,78 @@
+GIT
+  remote: https://github.com/vbanthia/rspec_html_formatter2
+  revision: 90c799a464b9b9efbc0803f8ad877af8553a037a
+  branch: rspec_html_reporter
+  specs:
+    rspec_html_reporter (1.0.0)
+      activesupport
+      rouge (~> 1.6)
+      rspec
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (5.1.4)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (~> 0.7)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
+    appium_lib (9.7.5)
+      awesome_print (~> 1.8)
+      json (>= 1.8)
+      nokogiri (~> 1.6, >= 1.6.6)
+      selenium-webdriver (~> 3.4, >= 3.4.1)
+      tomlrb (~> 1.1)
+    awesome_print (1.8.0)
+    childprocess (0.8.0)
+      ffi (~> 1.0, >= 1.0.11)
+    coderay (1.1.2)
+    concurrent-ruby (1.0.5)
+    diff-lcs (1.3)
+    ffi (1.9.18)
+    i18n (0.9.1)
+      concurrent-ruby (~> 1.0)
+    json (2.1.0)
+    method_source (0.9.0)
+    mini_portile2 (2.3.0)
+    minitest (5.10.3)
+    nokogiri (1.8.1)
+      mini_portile2 (~> 2.3.0)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    rake (12.3.0)
+    rouge (1.11.1)
+    rspec (3.7.0)
+      rspec-core (~> 3.7.0)
+      rspec-expectations (~> 3.7.0)
+      rspec-mocks (~> 3.7.0)
+    rspec-core (3.7.0)
+      rspec-support (~> 3.7.0)
+    rspec-expectations (3.7.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.7.0)
+    rspec-mocks (3.7.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.7.0)
+    rspec-support (3.7.0)
+    rubyzip (1.2.1)
+    selenium-webdriver (3.7.0)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.0)
+    thread_safe (0.3.6)
+    tomlrb (1.2.6)
+    tzinfo (1.2.4)
+      thread_safe (~> 0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  appium_lib
+  pry
+  rake
+  rspec
+  rspec_html_reporter!
+
+BUNDLED WITH
+   1.16.0

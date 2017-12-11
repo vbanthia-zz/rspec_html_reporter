@@ -1,30 +1,28 @@
-# RSpec HTML Formatter2
+# RSpec HTML Reporter
 
 Publish pretty [rspec](http://rspec.info/) reports
 
-This is a ruby RSpec custom formatter which generates pretty html reports showing the results of rspec tests. It has features to embed images and videos into report providing better debugging information in case test is failed. Check this [Sample Report](https://vbanthia.github.io/rspec_html_formatter2/index.html).
+This is a ruby RSpec custom formatter which generates pretty html reports showing the results of rspec tests. It has features to embed images and videos into report providing better debugging information in case test is failed. Check this [Sample Report](https://vbanthia.github.io/rspec_html_reporter/index.html).
 
 ## Setup
 
 Add this in your Gemfile:
 
 ```rb
-gem 'rspec_html_formatter2', git: 'https://github.com/vbanthia/rspec_html_formatter2'
+gem 'rspec_html_reporter'
 ```
-**Note:** Will publish it soon.
-
 ## Running
 
 Either add below in your `.rspec` file
 
 ```rb
---format RspecHtmlFormatter
+--format RspecHtmlReporter
 ```
 
-or run RSpec with `--format RspecHtmlFormatter` like below:
+or run RSpec with `--format RspecHtmlReporter` like below:
 
 ```bash
-REPORT_PATH=reports/$(date +%s) bundle exec rspec --format RspecHtmlFormatter spec
+REPORT_PATH=reports/$(date +%s) bundle exec rspec --format RspecHtmlReporter spec
 ```
 
 Above will create reports in `reports` directory.

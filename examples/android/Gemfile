@@ -1,0 +1,10 @@
+source 'https://rubygems.org'
+
+gem 'appium_lib'
+gem 'rake'
+gem 'rspec'
+gem 'rspec_html_reporter', git: 'https://github.com/vbanthia/rspec_html_formatter2', branch: 'rspec_html_reporter'
+
+group :development do
+  gem 'pry'
+end

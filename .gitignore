@@ -2,8 +2,6 @@
 coverage
 coverage.data
 
-.idea
-rspec_html_reports
 # rdoc generated
 rdoc
 
@@ -25,5 +23,8 @@ pkg
 # For rubinius:
 #*.rbc
 
-# docs
-docs/
+# Reports
+reports/
+
+# Bundler
+vendor

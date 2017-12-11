@@ -157,7 +157,7 @@ class Specify
   end
 end
 
-class RspecHtmlFormatter < RSpec::Core::Formatters::BaseFormatter
+class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
 
   DEFAULT_REPORT_PATH = File.join(Bundler.root, 'reports', Time.now.strftime('%Y%m%d-%H%M%S'))
   REPORT_PATH = ENV['REPORT_PATH'] || DEFAULT_REPORT_PATH
@@ -296,5 +296,4 @@ class RspecHtmlFormatter < RSpec::Core::Formatters::BaseFormatter
   def copy_resources
     FileUtils.cp_r(File.dirname(__FILE__) + '/../resources', REPORT_PATH)
   end
-
 end
