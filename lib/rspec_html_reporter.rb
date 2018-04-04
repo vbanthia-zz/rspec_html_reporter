@@ -165,6 +165,9 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
   SCREENSHOT_DIR   = File.join(REPORT_PATH, 'screenshots')
   RESOURCE_DIR     = File.join(REPORT_PATH, 'resources')
   JSON_DIR         = File.join(REPORT_PATH, 'json')
+
+  # `ENV['TEST_ENV_NUMBER']` comes from parallel_rspec.  It also has a bug where the first parallel
+  # process is rendered as a "".  Also when run synchronously it's nil. So this handles that
   TEST_NUMBER      = ENV['TEST_ENV_NUMBER']&.empty? || ENV['TEST_ENV_NUMBER'].nil? ? '1' :
                      ENV['TEST_ENV_NUMBER']
 
