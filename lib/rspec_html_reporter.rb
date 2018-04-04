@@ -158,13 +158,15 @@ class Specify
 end
 
 class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
-
-  DEFAULT_REPORT_PATH = File.join(Bundler.root, 'reports', Time.now.strftime('%Y%m%d-%H%M%S'))
-  REPORT_PATH = ENV['REPORT_PATH'] || DEFAULT_REPORT_PATH
+  # `ENV['RUNNING_TESTS']` comes from rtx-integration-tests
+  REPORT_PATH = File.join(Bundler.root, 'reports', ENV['RUNNING_TESTS'])
 
   SCREENRECORD_DIR = File.join(REPORT_PATH, 'screenrecords')
   SCREENSHOT_DIR   = File.join(REPORT_PATH, 'screenshots')
   RESOURCE_DIR     = File.join(REPORT_PATH, 'resources')
+  JSON_DIR         = File.join(REPORT_PATH, 'json')
+  TEST_NUMBER      = ENV['TEST_ENV_NUMBER']&.empty? || ENV['TEST_ENV_NUMBER'].nil? ? '1' :
+                     ENV['TEST_ENV_NUMBER']
 
   RSpec::Core::Formatters.register self, :example_started, :example_passed, :example_failed, :example_pending, :example_group_finished
 
@@ -172,7 +174,9 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
     create_reports_dir
     create_screenshots_dir
     create_screenrecords_dir
+    create_json_dir
     copy_resources
+
     @all_groups = {}
 
     @group_level = 0
@@ -247,23 +251,36 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
             pending: statuses.select { |s| s == 'pending' },
             duration: @summary_duration
         }
-
         template_file = File.read(File.dirname(__FILE__) + '/../templates/report.erb')
-
         f.puts ERB.new(template_file).result(binding)
       end
     end
   end
 
   def close(notification)
+    # Always write `@all_groups` to json file.  That's how reporting works in parallel
+    File.write("#{JSON_DIR}/#{TEST_NUMBER}.json", @all_groups.to_json)
+
+    # Gets ParallelTests from rtx-integration-tests, and exits early if not the last process
+    return if !ParallelTests.last_process?
+    ParallelTests.wait_for_other_processes_to_finish
+
+    # Merges all parallel runs json files into `@all_groups`
+    @all_groups = {}
+    Dir["#{JSON_DIR}/*.json"].each do |json_file|
+      @all_groups.merge!(JSON.parse(File.read(json_file)))
+    end
+
     File.open("#{REPORT_PATH}/overview.html", 'w') do |f|
       @overview = @all_groups
 
-      @passed = @overview.values.map { |g| g[:passed].size }.inject(0) { |sum, i| sum + i }
-      @failed = @overview.values.map { |g| g[:failed].size }.inject(0) { |sum, i| sum + i }
-      @pending = @overview.values.map { |g| g[:pending].size }.inject(0) { |sum, i| sum + i }
+      # Since we're converting ruby `@all_groups`-> json -> ruby, we lose symbols.  So below we
+      # replace all symbols with strings
+      @passed = @overview.values.map { |g| g['passed'].size }.inject(0) { |sum, i| sum + i }
+      @failed = @overview.values.map { |g| g['failed'].size }.inject(0) { |sum, i| sum + i }
+      @pending = @overview.values.map { |g| g['pending'].size }.inject(0) { |sum, i| sum + i }
 
-      duration_values = @overview.values.map { |e| e[:duration] }
+      duration_values = @overview.values.map { |e| e['duration'] }
 
       duration_keys = duration_values.size.times.to_a
       if duration_values.size < 2
@@ -280,20 +297,26 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
   end
 
   private
+
   def create_reports_dir
-    FileUtils.rm_rf(REPORT_PATH) if File.exists?(REPORT_PATH)
-    FileUtils.mkpath(REPORT_PATH)
+    FileUtils.mkdir_p(REPORT_PATH) unless File.exist?(REPORT_PATH)
+  end
+
+  def create_json_dir
+    FileUtils.mkdir_p(JSON_DIR) unless File.exist?(JSON_DIR)
   end
 
   def create_screenshots_dir
-    FileUtils.mkdir_p SCREENSHOT_DIR unless File.exists?(SCREENSHOT_DIR)
+    FileUtils.mkdir_p(SCREENSHOT_DIR) unless File.exist?(SCREENSHOT_DIR)
   end
 
   def create_screenrecords_dir
-    FileUtils.mkdir_p SCREENRECORD_DIR unless File.exists?(SCREENRECORD_DIR)
+    FileUtils.mkdir_p(SCREENRECORD_DIR) unless File.exist?(SCREENRECORD_DIR)
   end
 
   def copy_resources
-    FileUtils.cp_r(File.dirname(__FILE__) + '/../resources', REPORT_PATH)
+    unless File.exist?(RESOURCE_DIR)
+      FileUtils.cp_r(File.dirname(__FILE__) + '/../resources', REPORT_PATH)
+    end
   end
 end
