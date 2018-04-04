@@ -219,9 +219,12 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
 
   def example_group_finished(notification)
     @group_level -= 1
-
     if @group_level == 0
-      File.open("#{REPORT_PATH}/#{notification.group.description.parameterize}.html", 'w') do |f|
+      file_name = notification.group.metadata[:location]
+                                      .gsub('./','')
+                                      .gsub('/','-')
+                                      .gsub(/\.rb\:\d+/,'')
+      File.open("#{REPORT_PATH}/#{file_name}.html", 'w') do |f|
 
         @passed = @group_example_success_count
         @failed = @group_example_failure_count
@@ -244,7 +247,7 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
         class_map = {passed: 'success', failed: 'danger', pending: 'warning'}
         statuses = @examples.map { |e| e.status }
         status = statuses.include?('failed') ? 'failed' : (statuses.include?('passed') ? 'passed' : 'pending')
-        @all_groups[notification.group.description.parameterize] = {
+        @all_groups[file_name] = {
             group: notification.group.description,
             examples: @examples.size,
             status: status,
