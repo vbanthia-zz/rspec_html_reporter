@@ -218,6 +218,9 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
   end
 
   def example_group_finished(notification)
+    # Don't save any content if we're rerunning but the RSpec flag isn't turned on
+    return if ENV['RE_RUN'] && !RSpec.configuration.only_failures?
+
     @group_level -= 1
     if @group_level == 0
       file_name = notification.group.metadata[:location]
@@ -264,6 +267,9 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
   end
 
   def close(notification)
+    # Don't save any content if we're rerunning but the RSpec flag isn't turned on
+    return if ENV['RE_RUN'] && !RSpec.configuration.only_failures?
+
     # Always write `@all_groups` to json file.  That's how reporting works in parallel
     File.write("#{JSON_DIR}/#{TEST_NUMBER}.json", @all_groups.to_json)
 
