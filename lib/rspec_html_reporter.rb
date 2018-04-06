@@ -6,6 +6,7 @@ require 'fileutils'
 require 'rouge'
 require 'erb'
 require 'rbconfig'
+require 'timeout'
 
 I18n.enforce_available_locales = false
 
@@ -274,8 +275,14 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
     File.write("#{JSON_DIR}/#{TEST_NUMBER}.json", @all_groups.to_json)
 
     # Gets ParallelTests from rtx-integration-tests, and exits early if not the last process
-    return if !ParallelTests.last_process?
-    ParallelTests.wait_for_other_processes_to_finish
+    begin
+      Timeout.timeout (10*60) do
+        return if !ParallelTests.last_process?
+        ParallelTests.wait_for_other_processes_to_finish
+      end
+    rescue Timeout::Error
+      raise Timeout::Error, "waited 10 minutes for last process to finish, but it wasn't able to finish"
+    end
 
     # Merges all parallel runs json files into `@all_groups`
     @all_groups = {}
