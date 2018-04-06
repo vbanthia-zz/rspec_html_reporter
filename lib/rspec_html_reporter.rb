@@ -274,14 +274,19 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
     # Always write `@all_groups` to json file.  That's how reporting works in parallel
     File.write("#{JSON_DIR}/#{TEST_NUMBER}.json", @all_groups.to_json)
 
+    # Fails to the top, then Passed, then Pending
+    @overview = @overview.sort_by { |name, group| group['status'] }.to_h
+    @name_of_report = ENV['RUNNING_TESTS']
+
     # Gets ParallelTests from rtx-integration-tests, and exits early if not the last process
     begin
-      Timeout.timeout (10*60) do
+      minutes = 10 * 60
+      Timeout.timeout minutes do
         return if !ParallelTests.last_process?
         ParallelTests.wait_for_other_processes_to_finish
       end
     rescue Timeout::Error
-      raise Timeout::Error, "waited 10 minutes for last process to finish, but it wasn't able to finish"
+      raise Timeout::Error, "waited #{minutes} minutes for last process to finish, but it didn't"
     end
 
     # Merges all parallel runs json files into `@all_groups`
