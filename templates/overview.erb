@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rspec HTML Reports - Overview</title>
+  <title>Rspec HTML Reports - <%= @name_of_report %></title>
 
   <!-- Bootstrap -->
   <link href="resources/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -23,7 +23,6 @@
       * {
           font-size: 14px;
       }
-
       <%= Rouge::Themes::Github.render(:scope => '.highlight') %>
   </style>
 </head>
@@ -42,7 +41,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <p class="text-center" style="font-size:2em;">Overview</p>
+              <p class="text-center" style="font-size:2em;"><%= @name_of_report %></p>
             </div>
           </div>
         </div>
@@ -86,13 +85,13 @@
             <tr>
               <td><%= i %></td>
               <td>
-                <a href="<%= group_name %>.html"><%= group[:group] %></a>
+                <a href="<%= group_name %>.html"><%= group['group'] %></a>
               </td>
               <td><%= group[:duration] %></td>
-              <td class="warning"><span><%= group[:pending].size %></span></td>
-              <td class="danger"><span><%= group[:failed].size %></span></td>
-              <td class="success"><span><%= group[:passed].size %></span></td>
-              <td><span class="label label-<%= group[:klass]%>"><%= group[:status] %></span></td>
+              <td class="warning"><span><%= group['pending'].size %></span></td>
+              <td class="danger"><span><%= group['failed'].size %></span></td>
+              <td class="success"><span><%= group['passed'].size %></span></td>
+              <td><span class="label label-<%= group['klass']%>"><%= group['status'] %></span></td>
             </tr>
         <% i+= 1%>
         <% end %>
@@ -105,9 +104,7 @@
 </div>
 
 <script type="text/javascript">
-
   var pieCtx = document.getElementById("pieChart");
-
   var pieChart = new Chart(pieCtx, {
     type: 'doughnut',
     data: {
@@ -115,7 +112,6 @@
         datasets: [{
           label: 'Examples',
           data: [<%= @passed %>, <%= @failed %>, <%= @pending %>],
-
           backgroundColor: [
             '#3c9a5f',
             '#ea2f10',
@@ -130,7 +126,6 @@
         }]
     },
   });
-
 </script>
 
 </body>
