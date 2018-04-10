@@ -23,7 +23,6 @@
       * {
           font-size: 14px;
       }
-
       .spacer {
         margin-left: 10px;
       }
@@ -155,8 +154,10 @@
                         </div>
                         <div class="panel-body">
                           <%= example.exception.explanation %>
-                          <h5><%= example.exception.backtrace_message %></h5>
                           <%= example.exception.highlighted_source %>
+                          <% example.exception.backtrace.each_with_index do |exception, i| %>
+                            <% if i <=15 %><h5><%= exception%></h5><% end %>
+                          <% end %>
                         </div>
 
                           <% if example.has_failed_screenshot? %>
@@ -189,7 +190,6 @@
 
 <script type="text/javascript">
   var pieCtx = document.getElementById("pieChart");
-
   var pieChart = new Chart(pieCtx, {
     type: 'doughnut',
     data: {
@@ -197,7 +197,6 @@
       datasets: [{
         label: 'Examples',
         data: [<%= @passed %>, <%= @failed %>, <%= @pending %>],
-
         backgroundColor: [
           '#3c9a5f',
           '#ea2f10',
@@ -212,7 +211,6 @@
       }]
     },
   });
-
   function toggler(divId) {
     $("#" + divId).slideToggle();
   }
