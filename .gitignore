@@ -28,3 +28,7 @@ reports/
 
 # Bundler
 vendor
+
+# IDE
+*.iml
+.idea/
