@@ -1,7 +1,6 @@
 require 'rspec'
 
 describe 'Embed Graphics' do
-
   before(:all) do
     # Move assets to report folder
 
@@ -10,7 +9,6 @@ describe 'Embed Graphics' do
     FileUtils.cp './spec/support/assets/images/screen_1.png', "#{report_dir}/screenshots/"
     FileUtils.cp './spec/support/assets/images/screen_2.png', "#{report_dir}/screenshots/"
     FileUtils.cp './spec/support/assets/videos/screen_record.mp4', "#{report_dir}/screenrecords/"
-
   end
 
   context 'Screenshots' do
@@ -140,5 +138,4 @@ describe 'Embed Graphics' do
       expect(true).to eq(false)
     end
   end
-
 end
