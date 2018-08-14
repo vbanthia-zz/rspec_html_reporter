@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 RSpec.describe 'Subtraction' do
   let!(:x) { 15 }
   let!(:y) { 5 }
@@ -18,7 +16,7 @@ RSpec.describe 'Subtraction' do
     sleep 1
 
     result_text = $driver.find_element(:accessibility_id, 'resultTextView').text
-    expected_result = "%.2f" % x + " - " + "%.2f" % y + " = " + "%.2f" % (x - y)
+    expected_result = format('%.2f', x) + ' - ' + format('%.2f', y) + ' = ' + format('%.2f', (x - y))
     expect(result_text).to eq(expected_result)
   end
 end

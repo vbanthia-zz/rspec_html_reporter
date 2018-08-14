@@ -1,24 +1,19 @@
-# -*- coding: utf-8 -*-
-
 require_relative './adb'
 
 module ScreenUtil
-
   include ::AdbUtil
 
-  SCREENRECORD_DEVICE_PATH = '/sdcard/screenrecord.mp4'
+  SCREENRECORD_DEVICE_PATH = '/sdcard/screenrecord.mp4'.freeze
 
   @@screenrecord_pid   = nil
   @@screenrecord_count = 0
   @@screenshot_count   = 0
 
   def start_screenrecord
-    if @@screenrecord_pid
-      stop_screenrecord
-    end
+    stop_screenrecord if @@screenrecord_pid
 
     cmd = "adb shell screenrecord #{SCREENRECORD_DEVICE_PATH}"
-    @@screenrecord_pid = spawn(cmd, :out => '/dev/null')
+    @@screenrecord_pid = spawn(cmd, out: '/dev/null')
 
     Process.detach(@@screenrecord_pid)
   end
@@ -53,13 +48,13 @@ module ScreenUtil
   end
 
   def take_screenshot(prefix: nil)
-    img_name = "img_#{ next_screenshot_count }.png"
-    img_name =  "#{ prefix }_#{ img_name }" unless prefix.nil?
+    img_name = "img_#{next_screenshot_count}.png"
+    img_name = "#{prefix}_#{img_name}" unless prefix.nil?
     img_path = File.join(screenshot_dir, img_name)
     begin
       $driver.screenshot(img_path)
-    rescue => e
-      $stderr.puts "saving screenshot failed #{ e.message }"
+    rescue StandardError => e
+      warn "saving screenshot failed #{e.message}"
     end
     img_path
   end
