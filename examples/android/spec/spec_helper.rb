@@ -1,16 +1,12 @@
-# -*- coding: utf-8 -*-
-
 require 'appium_lib'
 
-
 # support files
-SPEC_ROOT = File.expand_path(File.dirname(__FILE__))
+SPEC_ROOT = __dir__
 Dir[File.expand_path('support/**/*.rb', SPEC_ROOT)].each { |f| require f }
 
 app_path = File.join(Bundler.root, 'apks', 'android-sample-app.apk')
 
 RSpec.configure do |config|
-
   config.include ::ScreenUtil
   config.include ::PathUtil
 
@@ -22,10 +18,10 @@ RSpec.configure do |config|
       app: app_path
     }
 
-    Appium::Driver.new({caps: driver_caps}, true).start_driver
+    Appium::Driver.new({ caps: driver_caps }, true).start_driver
   end
 
-  config.before do |example|
+  config.before do |_example|
     start_screenrecord
   end
 

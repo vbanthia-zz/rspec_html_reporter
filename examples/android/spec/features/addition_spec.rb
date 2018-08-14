@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 RSpec.describe 'Addition' do
   let!(:x) { 7 }
   let!(:y) { 3 }
@@ -19,7 +17,7 @@ RSpec.describe 'Addition' do
     sleep 1
 
     result_text = $driver.texts.first.text
-    expected_result = "%.2f" % x + " + " + "%.2f" % y + " = " + "%.2f" % (x + y)
+    expected_result = format('%.2f', x) + ' + ' + format('%.2f', y) + ' = ' + format('%.2f', (x + y))
     expect(result_text).to eq(expected_result)
   end
 end

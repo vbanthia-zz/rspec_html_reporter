@@ -1,10 +1,9 @@
 require 'rspec'
 
 describe 'RSpec HTML Reporter' do
-
   it 'should do cool test stuff' do
     pending('coming soon')
-    fail
+    raise
   end
 
   it 'should do amazing test stuff' do
@@ -46,10 +45,10 @@ describe 'RSpec HTML Reporter' do
   it 'should do very rawesome test stuff' do
     #-> Given I have some cars
     pending('give me a woop')
-    fail
+    raise
   end
 
   it 'should do insane and cool test stuff' do
     expect('ships').to eq 'ships'
-   end
+  end
 end

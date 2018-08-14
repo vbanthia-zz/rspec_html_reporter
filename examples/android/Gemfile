@@ -7,4 +7,5 @@ gem 'rspec_html_reporter', git: 'https://github.com/vbanthia/rspec_html_formatte
 
 group :development do
   gem 'pry'
+  gem 'rubocop'
 end
