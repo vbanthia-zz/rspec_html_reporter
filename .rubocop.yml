@@ -1,8 +1,23 @@
+AbcSize:
+  Enabled: false
+
+AccessorMethodName:
+  Enabled: false
+
+BlockLength:
+  Enabled: false
+
+ClassLength:
+  Enabled: false
+
 Documentation:
   Enabled: false
 
 LineLength:
-  Max: 120
+  Enabled: false
+
+MethodLength:
+  Enabled: false
 
 PredicateName:
   Enabled: false
