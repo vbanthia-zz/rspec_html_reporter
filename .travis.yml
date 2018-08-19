@@ -1,0 +1,8 @@
+language: ruby
+install: bundle install --without production --deployment
+cache:
+  directories:
+  - vendor/bundle
+rvm:
+  - 2.2.2
+script: bundle exec rubocop lib

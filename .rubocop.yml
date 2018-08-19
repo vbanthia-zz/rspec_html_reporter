@@ -1,0 +1,26 @@
+AbcSize:
+  Enabled: false
+
+AccessorMethodName:
+  Enabled: false
+
+BlockLength:
+  Enabled: false
+
+ClassLength:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+LineLength:
+  Enabled: false
+
+MethodLength:
+  Enabled: false
+
+PredicateName:
+  Enabled: false
+
+StringLiterals:
+  EnforcedStyle: double_quotes
