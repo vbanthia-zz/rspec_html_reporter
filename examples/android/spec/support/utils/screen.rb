@@ -24,7 +24,7 @@ module ScreenUtil
 
       # TODO: Figure out better way to know screenrecord is dead in device
       sleep 2
-    rescue Errno::ESRCH => e
+      # rescue Errno::ESRCH => e
       # Process already killed
     end
 
@@ -40,7 +40,7 @@ module ScreenUtil
 
       cmd = "shell rm #{SCREENRECORD_DEVICE_PATH}"
       execute_adb(cmd)
-    rescue Exception => e
+      # rescue Exception => e
       # do nothing
     end
 
