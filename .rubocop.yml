@@ -1,2 +1,11 @@
+Documentation:
+  Enabled: false
+
+LineLength:
+  Max: 120
+
+PredicateName:
+  Enabled: false
+
 StringLiterals:
   EnforcedStyle: double_quotes
