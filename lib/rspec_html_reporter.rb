@@ -173,7 +173,7 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
   end
 
   def example_group_started(_notification)
-    if @group_level == 0
+    if @group_level.zero?
       @example_group = {}
       @group_examples = []
       @group_example_count = 0
