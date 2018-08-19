@@ -1,76 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Turnip HTML Reports - <%= @title %></title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Turnip HTML Reports - <%= @title %></title>
 
-    <!-- Bootstrap -->
-    <link href="resources/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resources/bootstrap-4.0.0-dist/themes/bootstrap-theme-yeti.min.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="resources/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="resources/bootstrap-4.0.0-dist/themes/bootstrap-theme-yeti.min.css" rel="stylesheet">
 
-    <script src="resources/js/jquery-1.11.1.min.js"></script>
-    <script src="resources/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
-    <script src="resources/tether-1.3.3/js/tether.min.js"></script>
-    <script src="resources/js/Chart.js"></script>
-    <style>
-        * {
-            font-size: 14px;
-        }
+  <script src="resources/js/jquery-1.11.1.min.js"></script>
+  <script src="resources/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+  <script src="resources/tether-1.3.3/js/tether.min.js"></script>
+  <script src="resources/js/Chart.js"></script>
+  <style>
+      * {
+          font-size: 14px;
+      }
 
-        .spacer {
-          margin-left: 10px;
-        }
-        <%= Rouge::Themes::Github.render(:scope => '.highlight') %>
-    </style>
-  </head>
-  <body>
-    <div class="container">
-
-      <div class="bs-docs-section clearfix">
-        <div class="row">
-          <div class="col-lg-12">
-
-            <div class="bs-component">
-              <div class="navbar navbar-inverse">
-                <div class="navbar-header">
-                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                </div>
-
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul class="nav navbar-nav">
-                    <li><a href="overview.html">Overview</a></li>
-                  </ul>
-                </div>
-
+      .spacer {
+        margin-left: 10px;
+      }
+      <%= Rouge::Themes::Github.render(:scope => '.highlight') %>
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="bs-docs-section clearfix">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="bs-component">
+            <div class="navbar navbar-inverse">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  <li><a href="overview.html">Overview</a></li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="col-md-4">
-            <div class="panel panel-default">
-
-              <div class="panel-heading">Group Summary</div>
-              <div class="panel-body">
-                <span class="pull-right"><%= @total_examples %> Examples</span>
-                <canvas id="pieChart" width="300" height="300"></canvas>
-              </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">Group Summary</div>
+            <div class="panel-body">
+              <span class="pull-right"><%= @total_examples %> Examples</span>
+              <canvas id="pieChart" width="300" height="300"></canvas>
             </div>
           </div>
         </div>
-
+      </div>
       <div class="row">
-
         <div class="col-lg-12">
-
           <table class="table table-striped table-hover ">
             <thead>
             <tr>
@@ -81,135 +72,125 @@
             </tr>
             </thead>
             <tbody>
-            <% @examples.each_with_index do |example, i| %>
+              <% @examples.each_with_index do |example, i| %>
                 <tr>
                   <td id="example_<%= i+1 %>"><%= i+1 %></td>
                   <td width="100%">
                     <div>
-                          <div class="panel <%= example.klass('panel-') %>">
-                            <div class="panel-heading">
-                              <h3 class="panel-title pull-left"> <%= example.example_title %></h3>
-                              <% if example.has_screenrecord? %>
-                                <a href="#example_<%= i+1 %>" class="btn btn-xs btn-default spacer pull-right" onclick="toggler('screenrecord_<%= i+1 %>');">Screen Record</a>
-                              <% end %>
-                              <% if example.has_screenshots? %>
-                                <a href="#example_<%= i+1 %>" class="btn btn-xs btn-default spacer pull-right" onclick="toggler('screenshots_<%= i+1 %>');">Screen Shots</a>
-                              <% end %>
-                              <div class="clearfix"></div>
+                      <div class="panel <%= example.klass('panel-') %>">
+                        <div class="panel-heading">
+                          <h3 class="panel-title pull-left"> <%= example.example_title %></h3>
+                          <% if example.has_screenrecord? %>
+                            <a href="#example_<%= i+1 %>" class="btn btn-xs btn-default spacer pull-right" onclick="toggler('screenrecord_<%= i+1 %>');">Screen Record</a>
+                          <% end %>
+                          <% if example.has_screenshots? %>
+                            <a href="#example_<%= i+1 %>" class="btn btn-xs btn-default spacer pull-right" onclick="toggler('screenshots_<%= i+1 %>');">Screen Shots</a>
+                          <% end %>
+                          <div class="clearfix"></div>
+                        </div>
+                        <% if example.has_spec? or example.has_screenshots? or example.has_screenrecord? %>
+                          <!-- SPEC BLOCK -->
+                          <% if example.has_spec? %>
+                            <div class="panel-body">
+                              <%= example.spec %>
                             </div>
-
-
-                            <% if example.has_spec? or example.has_screenshots? or example.has_screenrecord? %>
-                            <!-- SPEC BLOCK -->
-                              <% if example.has_spec? %>
-                                <div class="panel-body">
-                                  <%= example.spec %>
+                          <% end %>
+                          <!--  SCREENSHOT BLOCK -->
+                          <% if example.has_screenshots? %>
+                            <div id="screenshots_<%= i+1 %>" class="panel-body" style="display:none">
+                              <% example.screenshots.each do |screenshot| %>
+                                <div class="col-md-4">
+                                  <div class="thumbnail">
+                                    <a href=<%= screenshot[:path] %> target="_blank">
+                                      <img src=<%= screenshot[:path] %> alt="Lights" style="width:50%; height:50%">
+                                      <div class="caption">
+                                        <p><%= screenshot[:caption] %></p>
+                                      </div>
+                                    </a>
+                                  </div>
                                 </div>
                               <% end %>
-
-                            <!--  SCREENSHOT BLOCK -->
-                              <% if example.has_screenshots? %>
-                                <div id="screenshots_<%= i+1 %>" class="panel-body" style="display:none">
-                                <% example.screenshots.each do |screenshot| %>
-                                  <div class="col-md-4">
-                                    <div class="thumbnail">
-                                      <a href=<%= screenshot[:path] %> target="_blank">
-                                        <img src=<%= screenshot[:path] %> alt="Lights" style="width:50%; height:50%">
-                                        <div class="caption">
-                                          <p><%= screenshot[:caption] %></p>
-                                        </div>
-                                      </a>
-                                    </div>
-                                  </div>
-                                <% end %>
+                            </div>
+                          <% end %>
+                          <!--  SCREENRECORD BLOCK -->
+                          <% if example.has_screenrecord? %>
+                            <div id="screenrecord_<%= i+1 %>" class="panel-body" style="display:none">
+                              <div class="col-md-4">
+                                <video controls width="250">
+                                  <source src=<%= example.screenrecord %> type="video/mp4">
+                                  Your browser does not support HTML5 video.
+                                </video>
                               </div>
-                              <% end %>
-
-                              <!--  SCREENRECORD BLOCK -->
-                              <% if example.has_screenrecord? %>
-                                <div id="screenrecord_<%= i+1 %>" class="panel-body" style="display:none">
-                                  <div class="col-md-4">
-                                    <video controls width="250">
-                                      <source src=<%= example.screenrecord %> type="video/mp4">
-                                      Your browser does not support HTML5 video.
-                                    </video>
-                                  </div>
-                                </div>
-                              <% end %>
                             </div>
-
-                            <% end %>
-                          </div>
+                          <% end %>
+                        <% end %>
+                      </div>
                     </div>
                     <div>
                       <% if example.has_exception? %>
-                          <div class="panel panel-danger">
-                            <div class="panel-heading">
-                              <h3 class="panel-title"><%= example.exception.klass %></h3>
-                            </div>
-                            <div class="panel-body">
-                              <%= example.exception.explanation %>
-                              <h5><%= example.exception.backtrace_message %></h5>
-                              <%= example.exception.highlighted_source %>
-                            </div>
-
-                              <% if example.has_failed_screenshot? %>
-                                <div class="panel-body">
-                                  <div class="col-md-4">
-                                    <div class="thumbnail">
-                                      <a href="<%= example.failed_screenshot %>" target="_blank">
-                                        <img src="<%= example.failed_screenshot %>" alt="Lights" style="width:50%;height:50%">
-                                      </a>
-                                    </div>
-                                  </div>
-                                </div>
-                              <% end %>
-                            </div>
+                        <div class="panel panel-danger">
+                          <div class="panel-heading">
+                            <h3 class="panel-title"><%= example.exception.klass %></h3>
                           </div>
+                          <div class="panel-body">
+                            <%= example.exception.explanation %>
+                            <h5><%= example.exception.backtrace_message %></h5>
+                            <%= example.exception.highlighted_source %>
+                          </div>
+                          <% if example.has_failed_screenshot? %>
+                            <div class="panel-body">
+                              <div class="col-md-4">
+                                <div class="thumbnail">
+                                  <a href="<%= example.failed_screenshot %>" target="_blank">
+                                    <img src="<%= example.failed_screenshot %>" alt="Lights" style="width:50%;height:50%">
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          <% end %>
+                        </div>
                       <% end %>
                     </div>
                   </td>
                   <td><%= example.duration %></td>
                   <td><span class="label <%= example.klass %>"><%= example.status %></span></td>
                 </tr>
-            <% end %>
+              <% end %>
             </tbody>
           </table>
-
         </div>
       </div>
-
     </div>
+  </div>
+<script type="text/javascript">
+  var pieCtx = document.getElementById("pieChart");
 
-    <script type="text/javascript">
-      var pieCtx = document.getElementById("pieChart");
+  var pieChart = new Chart(pieCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ["Passed", "Failed", "Pending"],
+      datasets: [{
+        label: 'Examples',
+        data: [<%= @passed %>, <%= @failed %>, <%= @pending %>],
 
-      var pieChart = new Chart(pieCtx, {
-        type: 'doughnut',
-        data: {
-          labels: ["Passed", "Failed", "Pending"],
-          datasets: [{
-            label: 'Examples',
-            data: [<%= @passed %>, <%= @failed %>, <%= @pending %>],
+        backgroundColor: [
+          '#3c9a5f',
+          '#ea2f10',
+          '#e99002'
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)'
+          ],
+        borderWidth: 1
+      }]
+    }
+  });
 
-            backgroundColor: [
-              '#3c9a5f',
-              '#ea2f10',
-              '#e99002'
-            ],
-            borderColor: [
-              'rgba(255,99,132,1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)'
-              ],
-            borderWidth: 1
-          }]
-        }
-      });
-
-      function toggler(divId) {
-        $("#" + divId).slideToggle();
-      }
-    </script>
-  </body>
+  function toggler(divId) {
+    $("#" + divId).slideToggle();
+  }
+</script>
+</body>
 </html>
