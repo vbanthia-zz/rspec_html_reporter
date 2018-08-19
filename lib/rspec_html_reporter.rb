@@ -207,7 +207,7 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
   def example_group_finished(notification)
     @group_level -= 1
 
-    if @group_level == 0
+    if @group_level.zero?
       File.open("#{REPORT_PATH}/#{notification.group.description.parameterize}.html", "w") do |f|
         @passed = @group_example_success_count
         @failed = @group_example_failure_count
