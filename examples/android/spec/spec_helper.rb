@@ -18,7 +18,7 @@ RSpec.configure do |config|
       app: app_path
     }
 
-    Appium::Driver.new({ caps: driver_caps }, true).start_driver
+    @driver = Appium::Driver.new({ caps: driver_caps }, true).start_driver
   end
 
   config.before do |_example|
@@ -35,6 +35,6 @@ RSpec.configure do |config|
   end
 
   config.after(:suite) do
-    $driver.driver_quit
+    @driver.driver_quit
   end
 end
