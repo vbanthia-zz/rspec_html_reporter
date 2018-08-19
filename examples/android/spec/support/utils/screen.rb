@@ -1,39 +1,34 @@
-# -*- coding: utf-8 -*-
-
-require_relative './adb'
+require_relative "./adb"
 
 module ScreenUtil
-
   include ::AdbUtil
 
-  SCREENRECORD_DEVICE_PATH = '/sdcard/screenrecord.mp4'
+  SCREENRECORD_DEVICE_PATH = "/sdcard/screenrecord.mp4".freeze
 
-  @@screenrecord_pid   = nil
-  @@screenrecord_count = 0
-  @@screenshot_count   = 0
+  @screenrecord_pid   = nil
+  @screenrecord_count = 0
+  @screenshot_count   = 0
 
   def start_screenrecord
-    if @@screenrecord_pid
-      stop_screenrecord
-    end
+    stop_screenrecord if @screenrecord_pid
 
     cmd = "adb shell screenrecord #{SCREENRECORD_DEVICE_PATH}"
-    @@screenrecord_pid = spawn(cmd, :out => '/dev/null')
+    @screenrecord_pid = spawn(cmd, out: "/dev/null")
 
-    Process.detach(@@screenrecord_pid)
+    Process.detach(@screenrecord_pid)
   end
 
   def stop_screenrecord
     begin
-      Process.kill('TERM', @@screenrecord_pid)
+      Process.kill("TERM", @screenrecord_pid)
 
       # TODO: Figure out better way to know screenrecord is dead in device
       sleep 2
-    rescue Errno::ESRCH => e
+      # rescue Errno::ESRCH => e
       # Process already killed
     end
 
-    @@screenrecord_pid = nil
+    @screenrecord_pid = nil
   end
 
   def pull_screenrecord
@@ -45,7 +40,7 @@ module ScreenUtil
 
       cmd = "shell rm #{SCREENRECORD_DEVICE_PATH}"
       execute_adb(cmd)
-    rescue Exception => e
+      # rescue Exception => e
       # do nothing
     end
 
@@ -53,23 +48,23 @@ module ScreenUtil
   end
 
   def take_screenshot(prefix: nil)
-    img_name = "img_#{ next_screenshot_count }.png"
-    img_name =  "#{ prefix }_#{ img_name }" unless prefix.nil?
+    img_name = "img_#{next_screenshot_count}.png"
+    img_name = "#{prefix}_#{img_name}" unless prefix.nil?
     img_path = File.join(screenshot_dir, img_name)
     begin
-      $driver.screenshot(img_path)
-    rescue => e
-      $stderr.puts "saving screenshot failed #{ e.message }"
+      @driver.screenshot(img_path)
+    rescue StandardError => e
+      warn "saving screenshot failed #{e.message}"
     end
     img_path
   end
 
   def next_screenrecord_count
-    @@screenrecord_count += 1
+    @screenrecord_count += 1
   end
 
   def next_screenshot_count
-    @@screenshot_count += 1
+    @screenshot_count += 1
   end
 
   def screenrecord_dir
