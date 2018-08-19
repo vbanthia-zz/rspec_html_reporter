@@ -15,14 +15,13 @@ class Oopsy
   def initialize(exception, file_path)
     @exception = exception
     @file_path = file_path
-    unless @exception.nil?
-      @klass = @exception.class
-      @message = @exception.message.encode("utf-8")
-      @backtrace = @exception.backtrace
-      @backtrace_message = @backtrace.nil? ? "" : @backtrace.select { |r| r.match(@file_path) }.join("").encode("utf-8")
-      @highlighted_source = process_source
-      @explanation = process_message
-    end
+    return if @exception.nil?
+    @klass = @exception.class
+    @message = @exception.message.encode("utf-8")
+    @backtrace = @exception.backtrace
+    @backtrace_message = @backtrace.nil? ? "" : @backtrace.select { |r| r.match(@file_path) }.join("").encode("utf-8")
+    @highlighted_source = process_source
+    @explanation = process_message
   end
 
   private
@@ -47,23 +46,22 @@ class Oopsy
 
   def process_source
     data = @backtrace_message.split(":")
-    unless data.empty?
-      if os == :windows
-        file_path = data[0] + ":" + data[1]
-        line_number = data[2].to_i
-      else
-        file_path = data.first
-        line_number = data[1].to_i
-      end
-      lines = File.readlines(file_path)
-      start_line = line_number - 2
-      end_line = line_number + 3
-      source = lines[start_line..end_line].join("").sub(lines[line_number - 1].chomp, "--->#{lines[line_number - 1].chomp}")
-
-      formatter = Rouge::Formatters::HTML.new(css_class: "highlight", line_numbers: true, start_line: start_line + 1)
-      lexer = Rouge::Lexers::Ruby.new
-      formatter.format(lexer.lex(source.encode("utf-8")))
+    return if data.empty?
+    if os == :windows
+      file_path = data[0] + ":" + data[1]
+      line_number = data[2].to_i
+    else
+      file_path = data.first
+      line_number = data[1].to_i
     end
+    lines = File.readlines(file_path)
+    start_line = line_number - 2
+    end_line = line_number + 3
+    source = lines[start_line..end_line].join("").sub(lines[line_number - 1].chomp, "--->#{lines[line_number - 1].chomp}")
+
+    formatter = Rouge::Formatters::HTML.new(css_class: "highlight", line_numbers: true, start_line: start_line + 1)
+    lexer = Rouge::Lexers::Ruby.new
+    formatter.format(lexer.lex(source.encode("utf-8")))
   end
 
   def process_message
@@ -207,44 +205,43 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
   def example_group_finished(notification)
     @group_level -= 1
 
-    if @group_level.zero?
-      File.open("#{REPORT_PATH}/#{notification.group.description.parameterize}.html", "w") do |f|
-        @passed = @group_example_success_count
-        @failed = @group_example_failure_count
-        @pending = @group_example_pending_count
+    return unless @group_level.zero?
+    File.open("#{REPORT_PATH}/#{notification.group.description.parameterize}.html", "w") do |f|
+      @passed = @group_example_success_count
+      @failed = @group_example_failure_count
+      @pending = @group_example_pending_count
 
-        duration_values = @group_examples.map(&:run_time)
+      duration_values = @group_examples.map(&:run_time)
 
-        duration_keys = duration_values.size.times.to_a
-        if (duration_values.size < 2) && !duration_values.empty?
-          duration_values.unshift(duration_values.first)
-          duration_keys = duration_keys << 1
-        end
-
-        @title = notification.group.description
-        @durations = duration_keys.zip(duration_values)
-
-        @summary_duration = duration_values.inject(0) { |sum, i| sum + i }.to_s(:rounded, precision: 5)
-        @examples = Specify.new(@group_examples).process
-
-        class_map = { passed: "success", failed: "danger", pending: "warning" }
-        statuses = @examples.map(&:status)
-        status = statuses.include?("failed") ? "failed" : (statuses.include?("passed") ? "passed" : "pending")
-        @all_groups[notification.group.description.parameterize] = {
-          group: notification.group.description,
-          examples: @examples.size,
-          status: status,
-          klass: class_map[status.to_sym],
-          passed: statuses.select { |s| s == "passed" },
-          failed: statuses.select { |s| s == "failed" },
-          pending: statuses.select { |s| s == "pending" },
-          duration: @summary_duration
-        }
-
-        template_file = File.read(File.dirname(__FILE__) + "/../templates/report.erb")
-
-        f.puts ERB.new(template_file).result(binding)
+      duration_keys = duration_values.size.times.to_a
+      if (duration_values.size < 2) && !duration_values.empty?
+        duration_values.unshift(duration_values.first)
+        duration_keys = duration_keys << 1
       end
+
+      @title = notification.group.description
+      @durations = duration_keys.zip(duration_values)
+
+      @summary_duration = duration_values.inject(0) { |sum, i| sum + i }.to_s(:rounded, precision: 5)
+      @examples = Specify.new(@group_examples).process
+
+      class_map = { passed: "success", failed: "danger", pending: "warning" }
+      statuses = @examples.map(&:status)
+      status = statuses.include?("failed") ? "failed" : (statuses.include?("passed") ? "passed" : "pending")
+      @all_groups[notification.group.description.parameterize] = {
+        group: notification.group.description,
+        examples: @examples.size,
+        status: status,
+        klass: class_map[status.to_sym],
+        passed: statuses.select { |s| s == "passed" },
+        failed: statuses.select { |s| s == "failed" },
+        pending: statuses.select { |s| s == "pending" },
+        duration: @summary_duration
+      }
+
+      template_file = File.read(File.dirname(__FILE__) + "/../templates/report.erb")
+
+      f.puts ERB.new(template_file).result(binding)
     end
   end
 
