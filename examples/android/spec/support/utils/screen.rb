@@ -1,9 +1,9 @@
-require_relative './adb'
+require_relative "./adb"
 
 module ScreenUtil
   include ::AdbUtil
 
-  SCREENRECORD_DEVICE_PATH = '/sdcard/screenrecord.mp4'.freeze
+  SCREENRECORD_DEVICE_PATH = "/sdcard/screenrecord.mp4".freeze
 
   @@screenrecord_pid   = nil
   @@screenrecord_count = 0
@@ -13,14 +13,14 @@ module ScreenUtil
     stop_screenrecord if @@screenrecord_pid
 
     cmd = "adb shell screenrecord #{SCREENRECORD_DEVICE_PATH}"
-    @@screenrecord_pid = spawn(cmd, out: '/dev/null')
+    @@screenrecord_pid = spawn(cmd, out: "/dev/null")
 
     Process.detach(@@screenrecord_pid)
   end
 
   def stop_screenrecord
     begin
-      Process.kill('TERM', @@screenrecord_pid)
+      Process.kill("TERM", @@screenrecord_pid)
 
       # TODO: Figure out better way to know screenrecord is dead in device
       sleep 2

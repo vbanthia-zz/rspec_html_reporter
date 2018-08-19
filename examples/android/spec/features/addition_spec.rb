@@ -1,23 +1,23 @@
-RSpec.describe 'Addition' do
+RSpec.describe "Addition" do
   let!(:x) { 7 }
   let!(:y) { 3 }
 
   before do
-    $driver.find_element(:accessibility_id, 'resetButton').click
+    $driver.find_element(:accessibility_id, "resetButton").click
 
     sleep 1
-    $driver.find_element(:accessibility_id, 'inputFieldLeft').send_key(x)
-    $driver.find_element(:accessibility_id, 'inputFieldRight').send_key(y)
+    $driver.find_element(:accessibility_id, "inputFieldLeft").send_key(x)
+    $driver.find_element(:accessibility_id, "inputFieldRight").send_key(y)
 
     sleep 1
   end
 
-  it 'add two numbers' do
-    $driver.find_element(:accessibility_id, 'additionButton').click
+  it "add two numbers" do
+    $driver.find_element(:accessibility_id, "additionButton").click
     sleep 1
 
     result_text = $driver.texts.first.text
-    expected_result = format('%.2f', x) + ' + ' + format('%.2f', y) + ' = ' + format('%.2f', (x + y))
+    expected_result = format("%.2f", x) + " + " + format("%.2f", y) + " = " + format("%.2f", (x + y))
     expect(result_text).to eq(expected_result)
   end
 end
