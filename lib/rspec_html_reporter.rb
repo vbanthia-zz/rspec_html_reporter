@@ -227,7 +227,11 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
 
       class_map = { passed: "success", failed: "danger", pending: "warning" }
       statuses = @examples.map(&:status)
-      status = statuses.include?("failed") ? "failed" : (statuses.include?("passed") ? "passed" : "pending")
+      status = if statuses.include?("failed")
+                 "failed"
+               else
+                 statuses.include?("passed") ? "passed" : "pending"
+               end
       @all_groups[notification.group.description.parameterize] = {
         group: notification.group.description,
         examples: @examples.size,
