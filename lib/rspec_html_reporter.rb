@@ -143,6 +143,7 @@ class Specify
     @examples.each_with_index do |e, i|
       lines = File.readlines(e.file_path)
       start_line = e.metadata[:line_number]
+      start_line = lines.size if start_line > lines.size
       end_line = @examples[i+1].nil? ? lines.size : @examples[i+1].metadata[:line_number] - 1
       code_block = lines[start_line..end_line]
       spec = code_block.select { |l| l.match(/#->/) }.join('')
