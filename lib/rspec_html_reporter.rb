@@ -76,6 +76,22 @@ end
 
 class Example
 
+  def self.load_spec_comments!(examples)
+    examples.group_by(&:file_path).each do |file_path, file_examples|
+      lines = File.readlines(file_path)
+
+      file_examples.zip(file_examples.rotate).each do |ex, next_ex|
+        lexically_next = next_ex &&
+          next_ex.file_path == ex.file_path &&
+          next_ex.metadata[:line_number] > ex.metadata[:line_number]
+        start_line_idx = ex.metadata[:line_number] - 1
+        next_start_idx = (lexically_next ? next_ex.metadata[:line_number] : lines.size) - 1
+        spec_lines = lines[start_line_idx...next_start_idx].select { |l| l.match(/#->/) }
+        ex.set_spec(spec_lines.join) unless spec_lines.empty?
+      end
+    end
+  end
+
   attr_reader :example_group, :description, :full_description, :run_time, :duration, :status, :exception, :file_path, :metadata, :spec, :screenshots, :screenrecord, :failed_screenshot
 
   def initialize(example)
@@ -122,8 +138,10 @@ class Example
     !@failed_screenshot.nil?
   end
 
-  def set_spec(spec)
-    @spec = spec
+  def set_spec(spec_text)
+    formatter = Rouge::Formatters::HTML.new(css_class: 'highlight')
+    lexer = Rouge::Lexers::Gherkin.new
+    @spec = formatter.format(lexer.lex(spec_text.gsub('#->', '')))
   end
 
   def klass(prefix='label-')
@@ -131,30 +149,6 @@ class Example
     class_map[@status.to_sym]
   end
 
-end
-
-class Specify
-
-  def initialize(examples)
-    @examples = examples
-  end
-
-  def process
-    @examples.each_with_index do |e, i|
-      lines = File.readlines(e.file_path)
-      start_line = e.metadata[:line_number]
-      end_line = @examples[i+1].nil? ? lines.size : @examples[i+1].metadata[:line_number] - 1
-      code_block = lines[start_line..end_line]
-      spec = code_block.select { |l| l.match(/#->/) }.join('')
-      if !spec.split.empty?
-        formatter = Rouge::Formatters::HTML.new(css_class: 'highlight')
-        lexer = Rouge::Lexers::Gherkin.new
-        formatted_spec = formatter.format(lexer.lex(spec.gsub('#->', '')))
-        e.set_spec(formatted_spec)
-      end
-    end
-    @examples
-  end
 end
 
 class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
@@ -181,7 +175,7 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
   def example_group_started(notification)
     if @group_level == 0
       @example_group = {}
-      @group_examples = []
+      @examples = []
       @group_example_count = 0
       @group_example_success_count = 0
       @group_example_failure_count = 0
@@ -197,17 +191,17 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
 
   def example_passed(notification)
     @group_example_success_count += 1
-    @group_examples << Example.new(notification.example)
+    @examples << Example.new(notification.example)
   end
 
   def example_failed(notification)
     @group_example_failure_count += 1
-    @group_examples << Example.new(notification.example)
+    @examples << Example.new(notification.example)
   end
 
   def example_pending(notification)
     @group_example_pending_count += 1
-    @group_examples << Example.new(notification.example)
+    @examples << Example.new(notification.example)
   end
 
   def example_group_finished(notification)
@@ -220,7 +214,7 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
         @failed = @group_example_failure_count
         @pending = @group_example_pending_count
 
-        duration_values = @group_examples.map { |e| e.run_time }
+        duration_values = @examples.map { |e| e.run_time }
 
         duration_keys = duration_values.size.times.to_a
         if duration_values.size < 2 and duration_values.size > 0
@@ -232,7 +226,7 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
         @durations = duration_keys.zip(duration_values)
 
         @summary_duration = duration_values.inject(0) { |sum, i| sum + i }.to_s(:rounded, precision: 5)
-        @examples = Specify.new(@group_examples).process
+        Example.load_spec_comments!(@examples)
 
         class_map = {passed: 'success', failed: 'danger', pending: 'warning'}
         statuses = @examples.map { |e| e.status }
