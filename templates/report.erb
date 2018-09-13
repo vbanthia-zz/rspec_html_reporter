@@ -152,16 +152,18 @@
                         </div>
                         <div class="panel-body">
                           <%= example.exception.explanation %>
-                          <dl>
-                            <dt>Backtrace:</dt>
-                            <dd>
-                              <ol>
-                                <% example.exception.backtrace_message.each do |message| %>
-                                  <li><%= message %></li>
-                                <% end %>
-                              </ol>
-                            </dd>
-                          </dl>
+                          <% unless example.exception.backtrace_message.empty? %>
+                            <dl>
+                              <dt>Backtrace:</dt>
+                              <dd>
+                                <ol>
+                                  <% example.exception.backtrace_message.each do |message| %>
+                                    <li><%= message %></li>
+                                  <% end %>
+                                </ol>
+                              </dd>
+                            </dl>
+                          <% end %>
                           <%= example.exception.highlighted_source %>
                         </div>
 

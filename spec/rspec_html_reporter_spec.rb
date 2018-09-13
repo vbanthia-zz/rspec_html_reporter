@@ -51,5 +51,16 @@ describe 'RSpec HTML Reporter' do
 
   it 'should do insane and cool test stuff' do
     expect('ships').to eq 'ships'
-   end
+  end
+
+  # MultipleExceptionError will be thrown above RSpec v3.3.0
+  describe 'Throw multiple exception' do
+    it "raise error" do
+      raise "This is an exception in test"
+    end
+
+    after :each do
+      raise "This is an exception in after method"
+    end
+  end
 end
