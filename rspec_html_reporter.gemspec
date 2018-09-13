@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = 'rspec_html_reporter'
-  spec.version       = '1.0.1'
+  spec.version       = '1.0.2'
   spec.authors       = ['Vishal Banthia']
   spec.email         = ['vishal.banthia.vb@gmail.com']
   spec.summary       = 'RSpec HTML Reporter'
