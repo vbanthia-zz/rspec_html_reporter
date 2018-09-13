@@ -12,14 +12,15 @@ I18n.enforce_available_locales = false
 class Oopsy
   attr_reader :klass, :message, :backtrace, :highlighted_source, :explanation, :backtrace_message
 
-  def initialize(exception, file_path)
-    @exception = exception
+  def initialize(example, file_path)
+    @example = example
+    @exception = @example.exception
     @file_path = file_path
     unless @exception.nil?
       @klass = @exception.class
       @message = @exception.message.encode('utf-8')
       @backtrace = @exception.backtrace
-      @backtrace_message = @backtrace.nil? ? '' : @backtrace.select { |r| r.match(@file_path) }.join('').encode('utf-8')
+      @backtrace_message = formatted_backtrace(@example, @exception)
       @highlighted_source = process_source
       @explanation = process_message
     end
@@ -45,8 +46,13 @@ class Oopsy
     )
   end
 
+  def formatted_backtrace(example, exception)
+    formatter = RSpec.configuration.backtrace_formatter
+    formatter.format_backtrace(exception.backtrace, example.metadata)
+  end
+
   def process_source
-    data = @backtrace_message.split(':')
+    data = @backtrace_message.first.split(':')
     unless data.empty?
     if os == :windows
       file_path = data[0] + ':' + data[1]
@@ -104,7 +110,7 @@ class Example
     @status = @execution_result.status.to_s
     @metadata = example.metadata
     @file_path = @metadata[:file_path]
-    @exception = Oopsy.new(example.exception, @file_path)
+    @exception = Oopsy.new(example, @file_path)
     @spec = nil
     @screenshots = @metadata[:screenshots]
     @screenrecord = @metadata[:screenrecord]
