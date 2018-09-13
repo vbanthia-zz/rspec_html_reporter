@@ -52,7 +52,7 @@ class Oopsy
   end
 
   def process_source
-    data = @backtrace_message[0].split(':')
+    data = @backtrace_message.first.split(':')
     unless data.empty?
     if os == :windows
       file_path = data[0] + ':' + data[1]
