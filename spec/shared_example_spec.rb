@@ -1,8 +1,8 @@
 require 'rspec'
 
-require_relative './support/shared_examples/foo'
+require_relative './support/shared_examples/from_another_file'
 
-RSpec.describe "Example Group" do
-  include_examples "foo", "foo"
-  include_examples "foo", "bar"
+RSpec.describe "Shared Examples" do
+  include_examples "from another file", :should_pass
+  include_examples "from another file", :should_fail
 end
