@@ -47,11 +47,14 @@ class Oopsy
   end
 
   def formatted_backtrace(example, exception)
+    # To avoid an error in format_backtrace. RSpec's version below v3.5 will throw exception.
+    return [] unless example
     formatter = RSpec.configuration.backtrace_formatter
     formatter.format_backtrace(exception.backtrace, example.metadata)
   end
 
   def process_source
+    return '' if @backtrace_message.empty?
     data = @backtrace_message.first.split(':')
     unless data.empty?
     if os == :windows
