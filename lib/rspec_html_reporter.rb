@@ -20,7 +20,7 @@ class Oopsy
       @klass = @exception.class
       @message = @exception.message.encode('utf-8')
       @backtrace = @exception.backtrace
-      @backtrace_message = formatted_backtrace(@example, @exception)
+      @backtrace_message = formatted_backtrace(@example, @exception).map { |entry| ERB::Util.html_escape(entry) }
       @highlighted_source = process_source
       @explanation = process_message
     end
