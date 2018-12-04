@@ -63,4 +63,28 @@ describe 'RSpec HTML Reporter' do
       raise "This is an exception in after method"
     end
   end
+
+  it 'should do commented stuff' do |example|
+    example.metadata[:comment] = 'This is an example comment!'
+    expect('something').to eq 'something'
+  end
+
+  describe 'Default comment' do
+    before :each do |example|
+      example.metadata[:comment] = 'A default comment'
+    end
+
+    it 'has default comment' do
+      expect('something').to eq 'something'
+    end
+
+    it 'overrides a comment' do |example|
+      example.metadata[:comment] = 'A better, happier comment'
+      expect('something').to eq 'something'
+    end
+
+    it 'shows a default comment for failure' do
+      expect('something').to eq 'something else'
+    end
+  end
 end

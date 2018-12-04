@@ -118,6 +118,7 @@ class Example
     @screenshots = @metadata[:screenshots]
     @screenrecord = @metadata[:screenrecord]
     @failed_screenshot = @metadata[:failed_screenshot]
+    @comment = @metadata[:comment]
   end
 
   def example_title
@@ -145,6 +146,14 @@ class Example
 
   def has_failed_screenshot?
     !@failed_screenshot.nil?
+  end
+
+  def has_comment?
+    !@comment.nil?
+  end
+
+  def comment
+    ERB::Util.html_escape(@comment)
   end
 
   def set_spec(spec_text)

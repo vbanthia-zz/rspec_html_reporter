@@ -101,6 +101,10 @@
                           <div class="clearfix"></div>
                         </div>
 
+                        <% if example.has_comment? %>
+                          <div class="panel-body"><%= example.comment %></div>
+                        <% end %>
+
 
                         <% if example.has_spec? or example.has_screenshots? or example.has_screenrecord? %>
                         <!-- SPEC BLOCK -->
