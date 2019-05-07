@@ -1,3 +1,6 @@
+**Not Actively maintained. Please fork it to make any new change**
+
+---
 # RSpec HTML Reporter
 
 Publish pretty [rspec](http://rspec.info/) reports
