@@ -1,3 +1,11 @@
+**My Updates**
+---
+Add a fix to enable to generate parallel reports
+
+
+
+
+
 **Not Actively maintained. Please fork it to make any new change**
 
 ---
