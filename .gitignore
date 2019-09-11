@@ -28,3 +28,5 @@ reports/
 
 # Bundler
 vendor
+
+.idea/*

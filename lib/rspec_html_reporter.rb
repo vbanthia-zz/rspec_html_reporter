@@ -30,19 +30,19 @@ class Oopsy
 
   def os
     @os ||= (
-      host_os = RbConfig::CONFIG['host_os']
-      case host_os
-      when /mswin|msys|mingw|cygwin|bccwin|wince|emc/
-        :windows
-      when /darwin|mac os/
-        :macosx
-      when /linux/
-        :linux
-      when /solaris|bsd/
-        :unix
-      else
-        raise Exception, "unknown os: #{host_os.inspect}"
-      end
+    host_os = RbConfig::CONFIG['host_os']
+    case host_os
+    when /mswin|msys|mingw|cygwin|bccwin|wince|emc/
+      :windows
+    when /darwin|mac os/
+      :macosx
+    when /linux/
+      :linux
+    when /solaris|bsd/
+      :unix
+    else
+      raise Exception, "unknown os: #{host_os.inspect}"
+    end
     )
   end
 
@@ -57,21 +57,21 @@ class Oopsy
     return '' if @backtrace_message.empty?
     data = @backtrace_message.first.split(':')
     unless data.empty?
-    if os == :windows
-      file_path = data[0] + ':' + data[1]
-      line_number = data[2].to_i
-    else
-       file_path = data.first
-       line_number = data[1].to_i
-    end
-    lines = File.readlines(file_path)
-    start_line = line_number-2
-    end_line = line_number+3
-    source = lines[start_line..end_line].join("").sub(lines[line_number-1].chomp, "--->#{lines[line_number-1].chomp}")
+      if os == :windows
+        file_path = data[0] + ':' + data[1]
+        line_number = data[2].to_i
+      else
+        file_path = data.first
+        line_number = data[1].to_i
+      end
+      lines = File.readlines(file_path)
+      start_line = line_number-2
+      end_line = line_number+3
+      source = lines[start_line..end_line].join("").sub(lines[line_number-1].chomp, "--->#{lines[line_number-1].chomp}")
 
-    formatter = Rouge::Formatters::HTML.new(css_class: 'highlight', line_numbers: true, start_line: start_line+1)
-    lexer = Rouge::Lexers::Ruby.new
-    formatter.format(lexer.lex(source.encode('utf-8')))
+      formatter = Rouge::Formatters::HTML.new(css_class: 'highlight', line_numbers: true, start_line: start_line+1)
+      lexer = Rouge::Lexers::Ruby.new
+      formatter.format(lexer.lex(source.encode('utf-8')))
     end
   end
 
@@ -91,8 +91,8 @@ class Example
 
       file_examples.zip(file_examples.rotate).each do |ex, next_ex|
         lexically_next = next_ex &&
-          next_ex.file_path == ex.file_path &&
-          next_ex.metadata[:line_number] > ex.metadata[:line_number]
+            next_ex.file_path == ex.file_path &&
+            next_ex.metadata[:line_number] > ex.metadata[:line_number]
         start_line_idx = ex.metadata[:line_number] - 1
         next_start_idx = (lexically_next ? next_ex.metadata[:line_number] : lines.size) - 1
         spec_lines = lines[start_line_idx...next_start_idx].select { |l| l.match(/#->/) }
@@ -254,13 +254,30 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
         template_file = File.read(File.dirname(__FILE__) + '/../templates/report.erb')
 
         f.puts ERB.new(template_file).result(binding)
+
+        # append json data for this test into the common json data file
+        File.open("#{REPORT_PATH}/overview.json", 'a') do |f|
+          f.puts notification.group.description.parameterize + "yatinyatinyatin" + @all_groups[notification.group.description.parameterize].to_json
+        end
       end
     end
   end
 
   def close(notification)
+    @overview = {}
+
+    # read json data for each test form the common json data file and load into @overview
+    File.open("#{REPORT_PATH}/overview.json", 'r') do |not_json_file|
+      lines = not_json_file.readlines
+
+      lines.each do |line|
+        key, json_val = line.split("yatinyatinyatin")
+        @overview[key] = JSON.parse(json_val).symbolize_keys
+      end
+    end
+
     File.open("#{REPORT_PATH}/overview.html", 'w') do |f|
-      @overview = @all_groups
+      # @overview = @all_groups
 
       @passed = @overview.values.map { |g| g[:passed].size }.inject(0) { |sum, i| sum + i }
       @failed = @overview.values.map { |g| g[:failed].size }.inject(0) { |sum, i| sum + i }
