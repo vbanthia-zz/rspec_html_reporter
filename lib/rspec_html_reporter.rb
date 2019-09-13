@@ -265,37 +265,38 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
 
   def close(notification)
     @overview = {}
+    if !@all_groups.empty?
+      # read json data for each test form the common json data file and load into @overview
+      File.open("#{REPORT_PATH}/overview.json", 'r') do |not_json_file|
+        lines = not_json_file.readlines
 
-    # read json data for each test form the common json data file and load into @overview
-    File.open("#{REPORT_PATH}/overview.json", 'r') do |not_json_file|
-      lines = not_json_file.readlines
-
-      lines.each do |line|
-        key, json_val = line.split("yatinyatinyatin")
-        @overview[key] = JSON.parse(json_val).symbolize_keys
-      end
-    end
-
-    File.open("#{REPORT_PATH}/overview.html", 'w') do |f|
-      # @overview = @all_groups
-
-      @passed = @overview.values.map { |g| g[:passed].size }.inject(0) { |sum, i| sum + i }
-      @failed = @overview.values.map { |g| g[:failed].size }.inject(0) { |sum, i| sum + i }
-      @pending = @overview.values.map { |g| g[:pending].size }.inject(0) { |sum, i| sum + i }
-
-      duration_values = @overview.values.map { |e| e[:duration] }
-
-      duration_keys = duration_values.size.times.to_a
-      if duration_values.size < 2
-        duration_values.unshift(duration_values.first)
-        duration_keys = duration_keys << 1
+        lines.each do |line|
+          key, json_val = line.split("yatinyatinyatin")
+          @overview[key] = JSON.parse(json_val).symbolize_keys
+        end
       end
 
-      @durations = duration_keys.zip(duration_values.map{|d| d.to_f.round(5)})
-      @summary_duration = duration_values.map{|d| d.to_f.round(5)}.inject(0) { |sum, i| sum + i }.to_s(:rounded, precision: 5)
-      @total_examples = @passed + @failed + @pending
-      template_file = File.read(File.dirname(__FILE__) + '/../templates/overview.erb')
-      f.puts ERB.new(template_file).result(binding)
+      File.open("#{REPORT_PATH}/overview.html", 'w') do |f|
+        # @overview = @all_groups
+
+        @passed = @overview.values.map { |g| g[:passed].size }.inject(0) { |sum, i| sum + i }
+        @failed = @overview.values.map { |g| g[:failed].size }.inject(0) { |sum, i| sum + i }
+        @pending = @overview.values.map { |g| g[:pending].size }.inject(0) { |sum, i| sum + i }
+
+        duration_values = @overview.values.map { |e| e[:duration] }
+
+        duration_keys = duration_values.size.times.to_a
+        if duration_values.size < 2
+          duration_values.unshift(duration_values.first)
+          duration_keys = duration_keys << 1
+        end
+
+        @durations = duration_keys.zip(duration_values.map{|d| d.to_f.round(5)})
+        @summary_duration = duration_values.map{|d| d.to_f.round(5)}.inject(0) { |sum, i| sum + i }.to_s(:rounded, precision: 5)
+        @total_examples = @passed + @failed + @pending
+        template_file = File.read(File.dirname(__FILE__) + '/../templates/overview.erb')
+        f.puts ERB.new(template_file).result(binding)
+      end
     end
   end
 
