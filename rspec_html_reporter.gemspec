@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir['{lib,resources,templates}/**/*', 'README*', 'LICENSE*'] & `git ls-files -z`.split("\0")
 
   spec.add_runtime_dependency('rspec')
+  spec.add_runtime_dependency('rspec-legacy_formatters')
   spec.add_runtime_dependency('rouge', '~> 1.6')
   spec.add_runtime_dependency('activesupport')
 
