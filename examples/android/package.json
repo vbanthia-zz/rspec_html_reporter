@@ -11,6 +11,12 @@
   "license": "MIT",
   "homepage": "https://github.com/vbanthia/stf-appium-example#readme",
   "dependencies": {
-    "appium": "^1.6.4"
-  }
+    "appium": "^1.6.4",
+    "snyk": "^1.316.1"
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
