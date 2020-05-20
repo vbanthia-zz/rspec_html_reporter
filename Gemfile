@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rspec-core', '>= 3.0.3'
 gem 'rouge', '1.6.1'
-gem 'activesupport', '>= 4.1.4'
+gem 'activesupport', '>= 5.2.4.3'
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
