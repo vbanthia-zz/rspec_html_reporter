@@ -109,7 +109,7 @@ class Example
     @full_description = example.full_description
     @execution_result = example.execution_result
     @run_time = (@execution_result.run_time).round(5)
-    @duration = @execution_result.run_time.to_s(:rounded, precision: 5)
+    @duration = @execution_result.run_time.to_fs(:rounded, precision: 5)
     @status = @execution_result.status.to_s
     @metadata = example.metadata
     @file_path = @metadata[:file_path]
@@ -234,7 +234,7 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
         @title = notification.group.description
         @durations = duration_keys.zip(duration_values)
 
-        @summary_duration = duration_values.inject(0) { |sum, i| sum + i }.to_s(:rounded, precision: 5)
+        @summary_duration = duration_values.inject(0) { |sum, i| sum + i }.to_fs(:rounded, precision: 5)
         Example.load_spec_comments!(@examples)
 
         class_map = {passed: 'success', failed: 'danger', pending: 'warning'}
@@ -275,7 +275,8 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
       end
 
       @durations = duration_keys.zip(duration_values.map{|d| d.to_f.round(5)})
-      @summary_duration = duration_values.map{|d| d.to_f.round(5)}.inject(0) { |sum, i| sum + i }.to_s(:rounded, precision: 5)
+      # require 'pry'; binding.pry
+      @summary_duration = duration_values.map{|d| d.to_f.round(5)}.inject(0) { |sum, i| sum + i }.to_fs(:rounded, precision: 5)
       @total_examples = @passed + @failed + @pending
       template_file = File.read(File.dirname(__FILE__) + '/../templates/overview.erb')
       f.puts ERB.new(template_file).result(binding)
