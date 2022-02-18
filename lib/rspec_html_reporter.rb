@@ -69,14 +69,14 @@ class Oopsy
     end_line = line_number+3
     source = lines[start_line..end_line].join("").sub(lines[line_number-1].chomp, "--->#{lines[line_number-1].chomp}")
 
-    formatter = Rouge::Formatters::HTML.new(css_class: 'highlight', line_numbers: true, start_line: start_line+1)
+    formatter = Rouge::Formatters::HTMLLegacy.new(css_class: 'highlight', line_numbers: true, start_line: start_line+1)
     lexer = Rouge::Lexers::Ruby.new
     formatter.format(lexer.lex(source.encode('utf-8')))
     end
   end
 
   def process_message
-    formatter = Rouge::Formatters::HTML.new(css_class: 'highlight')
+    formatter = Rouge::Formatters::HTMLLegacy.new(css_class: 'highlight')
     lexer = Rouge::Lexers::Ruby.new
     formatter.format(lexer.lex(@message))
   end
@@ -148,7 +148,7 @@ class Example
   end
 
   def set_spec(spec_text)
-    formatter = Rouge::Formatters::HTML.new(css_class: 'highlight')
+    formatter = Rouge::Formatters::HTMLLegacy.new(css_class: 'highlight')
     lexer = Rouge::Lexers::Gherkin.new
     @spec = formatter.format(lexer.lex(spec_text.gsub('#->', '')))
   end
