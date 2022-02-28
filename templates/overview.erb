@@ -61,28 +61,27 @@
           <canvas id="pieChart" width="300" height="300"></canvas>
         </div>
       </div>
-
     </div>
 
-  <div class="row">
+    <div class="row">
 
-    <div class="col-lg-12">
+      <div class="col-lg-12">
 
-      <table class="table table-striped table-hover ">
-        <thead>
-        <tr>
-          <th>#</th>
-          <th>Group</th>
-          <th>Duration</th>
-          <th class="warning">Pending</th>
-          <th class="danger">Failed</th>
-          <th class="success">Passed</th>
-          <th>Status</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% i = 1 %>
-        <% @overview.each do |group_name,group| %>
+        <table class="table table-striped table-hover ">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Group</th>
+            <th>Duration</th>
+            <th class="warning">Pending</th>
+            <th class="danger">Failed</th>
+            <th class="success">Passed</th>
+            <th>Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% i = 1 %>
+          <% @overview.each do |group_name, group| %>
             <tr>
               <td><%= i %></td>
               <td>
@@ -92,25 +91,25 @@
               <td class="warning"><span><%= group[:pending].size %></span></td>
               <td class="danger"><span><%= group[:failed].size %></span></td>
               <td class="success"><span><%= group[:passed].size %></span></td>
-              <td><span class="label label-<%= group[:klass]%>"><%= group[:status] %></span></td>
+              <td><span class="label label-<%= group[:klass] %>"><%= group[:status] %></span></td>
             </tr>
-        <% i+= 1%>
-        <% end %>
-        </tbody>
-      </table>
+            <% i += 1 %>
+          <% end %>
+          </tbody>
+        </table>
 
+      </div>
     </div>
+
   </div>
 
-</div>
+  <script type="text/javascript">
 
-<script type="text/javascript">
+    var pieCtx = document.getElementById("pieChart");
 
-  var pieCtx = document.getElementById("pieChart");
-
-  var pieChart = new Chart(pieCtx, {
-    type: 'doughnut',
-    data: {
+    var pieChart = new Chart(pieCtx, {
+      type: 'doughnut',
+      data: {
         labels: ["Passed", "Failed", "Pending"],
         datasets: [{
           label: 'Examples',
@@ -128,10 +127,10 @@
           ],
           borderWidth: 1
         }]
-    },
-  });
+      },
+    });
 
-</script>
+  </script>
 
 </body>
 </html>
