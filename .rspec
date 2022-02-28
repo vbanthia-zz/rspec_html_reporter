@@ -1,3 +1,4 @@
 --color
+--format documentation
 --format RspecHtmlReporter
 -r turnip/rspec
