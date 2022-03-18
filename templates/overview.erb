@@ -29,7 +29,7 @@
     <div class="row">
       <div class="col-xl-12">
         <div class="bs-component">
-          <div class="navbar navbar-dark bg-dark navbar-expand-md justify-content-center">
+          <div class="navbar navbar-dark bg-primary navbar-expand-md justify-content-center">
             <div class="navbar-header text-center">
               <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-responsive-collapse">&#x2630;</button>
               <span class="icon-bar"></span>
@@ -91,9 +91,9 @@
 
   <script type="text/javascript">
 
-    var pieCtx = document.getElementById("pieChart");
+    const pieCtx = document.getElementById("pieChart");
 
-    var pieChart = new Chart(pieCtx, {
+    const pieChart = new Chart(pieCtx, {
       type: 'doughnut',
       data: {
         labels: ["Passed", "Failed", "Pending"],
