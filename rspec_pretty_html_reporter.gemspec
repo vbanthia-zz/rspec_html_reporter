@@ -1,5 +1,3 @@
-# -*- encoding : utf-8 -*-
-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
@@ -21,7 +19,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency('rspec-core', '~>3.4')
 
   spec.add_development_dependency('byebug', '~> 11.1')
-  spec.add_development_dependency('pry', '~> 0.14')
   spec.add_development_dependency('rdoc', '~> 6.4')
   spec.add_development_dependency('rspec', '~> 3.4.0')
   spec.add_development_dependency('turnip', '~> 2.0', '>= 2.0.2')
