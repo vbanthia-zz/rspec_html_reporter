@@ -6,7 +6,7 @@ describe 'Embed Graphics' do
   before(:all) do
     # Move assets to report folder
 
-    report_dir = RspecHtmlReporter::REPORT_PATH
+    report_dir = RspecPrettyHtmlReporter::REPORT_PATH
 
     FileUtils.cp './spec/support/assets/images/screen_1.png', "#{report_dir}/screenshots/"
     FileUtils.cp './spec/support/assets/images/screen_2.png', "#{report_dir}/screenshots/"

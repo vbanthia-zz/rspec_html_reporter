@@ -26,7 +26,7 @@ Either add the below into your `.rspec` file
 or run RSpec with `--format RspecHtmlReporter` like below:
 
 ```bash
-REPORT_PATH=reports/$(date +%s) bundle exec rspec --format RspecHtmlReporter spec
+REPORT_PATH=reports/$(date +%s) bundle exec rspec --format RspecPrettyHtmlReporter spec
 ```
 
 This will create the reports in the `reports` directory.

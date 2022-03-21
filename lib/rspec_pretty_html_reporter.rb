@@ -9,7 +9,7 @@ require 'rspec_pretty_html_reporter/example'
 
 I18n.enforce_available_locales = false
 
-class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
+class RspecPrettyHtmlReporter < RSpec::Core::Formatters::BaseFormatter
   DEFAULT_REPORT_PATH = File.join(Bundler.root, 'reports', Time.now.strftime('%Y%m%d-%H%M%S'))
   REPORT_PATH = ENV['REPORT_PATH'] || DEFAULT_REPORT_PATH
 
