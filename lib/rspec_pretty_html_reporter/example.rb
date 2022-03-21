@@ -1,4 +1,4 @@
-require 'rspec_html_reporter/oopsy'
+require 'rspec_pretty_html_reporter/oopsy'
 
 class Example
   def self.load_spec_comments!(examples)

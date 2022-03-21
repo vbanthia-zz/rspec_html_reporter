@@ -1,6 +1,6 @@
 ## [Unreleased]
 
-## [1.0.5] - 2022-03-21
+## [1.1.0] - 2022-03-21
 
 - Added a report table for each of the individual example files
 - Updated theme to Boostrap 4

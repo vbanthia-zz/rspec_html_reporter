@@ -5,7 +5,7 @@ require 'active_support/core_ext/numeric'
 require 'active_support/inflector'
 require 'fileutils'
 require 'erb'
-require 'rspec_html_reporter/example'
+require 'rspec_pretty_html_reporter/example'
 
 I18n.enforce_available_locales = false
 

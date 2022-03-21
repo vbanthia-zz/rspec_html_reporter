@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rspec_html_reporter (1.0.5)
+    rspec_pretty_html_reporter (1.1.0)
       activesupport (~> 7.0)
       rouge (~> 3.28)
       rspec-core (~> 3.4)
@@ -61,7 +61,7 @@ DEPENDENCIES
   pry (~> 0.14)
   rdoc (~> 6.4)
   rspec (~> 3.4.0)
-  rspec_html_reporter!
+  rspec_pretty_html_reporter!
   turnip (~> 2.0, >= 2.0.2)
 
 BUNDLED WITH
