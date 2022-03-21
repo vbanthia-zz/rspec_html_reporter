@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rspec'
 
 describe 'Embed Graphics' do
-
   before(:all) do
     # Move assets to report folder
 
@@ -10,7 +11,6 @@ describe 'Embed Graphics' do
     FileUtils.cp './spec/support/assets/images/screen_1.png', "#{report_dir}/screenshots/"
     FileUtils.cp './spec/support/assets/images/screen_2.png', "#{report_dir}/screenshots/"
     FileUtils.cp './spec/support/assets/videos/screen_record.mp4', "#{report_dir}/screenrecords/"
-
   end
 
   context 'Screenshots' do
@@ -31,7 +31,7 @@ describe 'Embed Graphics' do
       }
       example.metadata[:screenshots] << {
         caption: 'Calculator3',
-        path: './screenshots/screen_1.png'
+        path: './screenshots/screen_2.png'
       }
 
       expect(true).to eq(true)
@@ -45,8 +45,8 @@ describe 'Embed Graphics' do
         path: './screenshots/screen_1.png'
       }
       example.metadata[:screenshots] << {
-        caption: 'Paystore1',
-        path: './screenshots/screen_2.png'
+        caption: 'Playstore2',
+        path: './screenshots/screen_1.png'
       }
 
       expect(true).to eq(false)
@@ -60,8 +60,8 @@ describe 'Embed Graphics' do
         path: './screenshots/screen_1.png'
       }
       example.metadata[:screenshots] << {
-        caption: 'Paystore1',
-        path: './screenshots/screen_2.png'
+        caption: 'Playstore2',
+        path: './screenshots/screen_1.png'
       }
 
       expect(true).to eq(false)
@@ -97,7 +97,7 @@ describe 'Embed Graphics' do
         path: './screenshots/screen_1.png'
       }
       example.metadata[:screenshots] << {
-        caption: 'Paystore1',
+        caption: 'Playstore2',
         path: './screenshots/screen_1.png'
       }
 
@@ -114,7 +114,7 @@ describe 'Embed Graphics' do
         path: './screenshots/screen_1.png'
       }
       example.metadata[:screenshots] << {
-        caption: 'Paystore1',
+        caption: 'Playstore2',
         path: './screenshots/screen_1.png'
       }
 
@@ -131,7 +131,7 @@ describe 'Embed Graphics' do
         path: './screenshots/screen_1.png'
       }
       example.metadata[:screenshots] << {
-        caption: 'Paystore1',
+        caption: 'Playstore2',
         path: './screenshots/screen_1.png'
       }
 
@@ -140,5 +140,4 @@ describe 'Embed Graphics' do
       expect(true).to eq(false)
     end
   end
-
 end
