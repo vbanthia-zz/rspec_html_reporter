@@ -15,7 +15,7 @@ Add this to your Gemfile:
 gem 'rspec-pretty-html-reporter'
 ```
 
-## Running
+## Generating the report
 
 Either add the below into your `.rspec` file
 
@@ -33,8 +33,8 @@ This will create the reports in the `reports` directory.
 
 ## Usage
 
-Images and videos can be embed by adding their path into example's metadata. Check
-this [Sample Test](./spec/embed_graphics_spec.rb).
+Images and videos can be embed by adding their path into example's metadata. For an example of how to do this, please
+check out this [Sample Test](./spec/embed_graphics_spec.rb).
 
 ## Credits
 
