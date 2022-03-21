@@ -88,6 +88,9 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
         @summary_duration = duration_values.inject(0) { |sum, i| sum + i }.to_fs(:rounded, precision: 5)
         Example.load_spec_comments!(@examples)
 
+        @total_group_examples = @passed + @failed + @pending
+
+
         class_map = { passed: 'success', failed: 'danger', pending: 'warning' }
         statuses = @examples.map(&:status)
         @status = if statuses.include?('failed')
