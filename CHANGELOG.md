@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [1.1.1] - 2022-03-21
+
+- Updated readme 
+
 ## [1.1.0] - 2022-03-21
 
 - Added a report table for each of the individual example files
