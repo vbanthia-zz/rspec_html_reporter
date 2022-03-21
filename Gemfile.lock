@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rspec_html_reporter (1.0.4)
+    rspec_pretty_html_reporter (1.1.0)
       activesupport (~> 7.0)
       rouge (~> 3.28)
       rspec-core (~> 3.4)
@@ -9,11 +9,12 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (7.0.2.2)
+    activesupport (7.0.2.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    byebug (11.1.3)
     coderay (1.1.3)
     concurrent-ruby (1.1.9)
     diff-lcs (1.5.0)
@@ -56,11 +57,11 @@ PLATFORMS
   x86_64-darwin-21
 
 DEPENDENCIES
-  bundler (~> 2.3)
+  byebug (~> 11.1)
   pry (~> 0.14)
   rdoc (~> 6.4)
   rspec (~> 3.4.0)
-  rspec_html_reporter!
+  rspec_pretty_html_reporter!
   turnip (~> 2.0, >= 2.0.2)
 
 BUNDLED WITH

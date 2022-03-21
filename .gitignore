@@ -29,4 +29,7 @@ reports/
 # Bundler
 vendor
 
+.byebug_history
 .idea
+*.gem
+

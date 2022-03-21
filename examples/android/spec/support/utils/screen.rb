@@ -73,10 +73,10 @@ module ScreenUtil
   end
 
   def screenrecord_dir
-    @screenrecord_dir ||= RspecHtmlReporter::SCREENRECORD_DIR
+    @screenrecord_dir ||= RspecPrettyHtmlReporter::SCREENRECORD_DIR
   end
 
   def screenshot_dir
-    @screenshot_dir ||= RspecHtmlReporter::SCREENSHOT_DIR
+    @screenshot_dir ||= RspecPrettyHtmlReporter::SCREENSHOT_DIR
   end
 end

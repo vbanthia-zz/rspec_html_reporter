@@ -1,38 +1,43 @@
-**Not Actively maintained. Please fork it to make any new change**
+# RSpec Pretty HTML Reporter
 
----
-# RSpec HTML Reporter
+Produce pretty [RSpec](http://rspec.info/) reports.
 
-Publish pretty [rspec](http://rspec.info/) reports
+This is a custom reporter for RSpec which generates pretty HTML reports showing the results of rspec tests. It has
+features to embed images and videos into the report providing better debugging information when a test fails.
 
-This is a ruby RSpec custom formatter which generates pretty html reports showing the results of rspec tests. It has features to embed images and videos into report providing better debugging information in case test is failed. Check this [Sample Report](https://vbanthia.github.io/rspec_html_reporter/index.html).
+<img src="https://github.com/TheSpartan1980/rspec_pretty_html_reporter/blob/feature/improve-html-report/images/group_overview_report.png" width="80%"/>
 
 ## Setup
 
-Add this in your Gemfile:
+Add this to your Gemfile:
 
 ```rb
-gem 'rspec_html_reporter'
+gem 'rspec-pretty-html-reporter'
 ```
-## Running
 
-Either add below in your `.rspec` file
+## Generating the report
+
+Either add the below into your `.rspec` file
 
 ```rb
---format RspecHtmlReporter
+--format RspecPrettyHtmlReporter
 ```
 
 or run RSpec with `--format RspecHtmlReporter` like below:
 
 ```bash
-REPORT_PATH=reports/$(date +%s) bundle exec rspec --format RspecHtmlReporter spec
+REPORT_PATH=reports/$(date +%s) bundle exec rspec --format RspecPrettyHtmlReporter spec
 ```
 
-Above will create reports in `reports` directory.
+This will create the reports in the `reports` directory.
 
 ## Usage
-Images and videos can be embed by adding their path into example's metadata. Check this [Sample Test](./spec/embed_graphics_spec.rb).
 
+Images and videos can be embed by adding their path into example's metadata. For an example of how to do this, please
+check out this [Sample Test](./spec/embed_graphics_spec.rb).
 
 ## Credits
-This library is forked from [kingsleyh/rspec_reports_formatter](https://github.com/kingsleyh/rspec_reports_formatter). Original Credits goes to *[kingsleyh](https://github.com/kingsleyh)*
+
+This library is forked from [vbanthia/rspec_html_reporter](https://github.com/vbanthia/rspec_html_reporter). The
+original credit goes to *[kingsleyh](https://github.com/kingsleyh)*
+for [kingsleyh/rspec_reports_formatter](https://github.com/kingsleyh/rspec_reports_formatter)
