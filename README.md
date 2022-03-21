@@ -1,3 +1,6 @@
+
+[![Gem Version](https://badge.fury.io/rb/rspec_pretty_html_reporter.svg)](https://badge.fury.io/rb/rspec_pretty_html_reporter)
+
 # RSpec Pretty HTML Reporter
 
 Produce pretty [RSpec](http://rspec.info/) reports.
@@ -23,7 +26,7 @@ Either add the below into your `.rspec` file
 --format RspecPrettyHtmlReporter
 ```
 
-or run RSpec with `--format RspecHtmlReporter` like below:
+or run RSpec with `--format RspecPrettyHtmlReporter` like below:
 
 ```bash
 REPORT_PATH=reports/$(date +%s) bundle exec rspec --format RspecPrettyHtmlReporter spec
