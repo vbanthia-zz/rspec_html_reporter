@@ -1,25 +1,26 @@
-**Not Actively maintained. Please fork it to make any new change**
+# RSpec Pretty HTML Reporter
 
----
-# RSpec HTML Reporter
+Produce pretty [RSpec](http://rspec.info/) reports.
 
-Publish pretty [rspec](http://rspec.info/) reports
+This is a custom reporter for RSpec which generates pretty HTML reports showing the results of rspec tests. It has
+features to embed images and videos into the report providing better debugging information when a test fails.
 
-This is a ruby RSpec custom formatter which generates pretty html reports showing the results of rspec tests. It has features to embed images and videos into report providing better debugging information in case test is failed. Check this [Sample Report](https://vbanthia.github.io/rspec_html_reporter/index.html).
+<img src="https://github.com/TheSpartan1980/rspec_pretty_html_reporter/blob/feature/improve-html-report/images/group_overview_report.png" width="60%"/>
 
 ## Setup
 
 Add this in your Gemfile:
 
 ```rb
-gem 'rspec_html_reporter'
+gem 'rspec-pretty-html-reporter'
 ```
+
 ## Running
 
 Either add below in your `.rspec` file
 
 ```rb
---format RspecHtmlReporter
+--format RspecPrettyHtmlReporter
 ```
 
 or run RSpec with `--format RspecHtmlReporter` like below:
@@ -31,8 +32,11 @@ REPORT_PATH=reports/$(date +%s) bundle exec rspec --format RspecHtmlReporter spe
 Above will create reports in `reports` directory.
 
 ## Usage
-Images and videos can be embed by adding their path into example's metadata. Check this [Sample Test](./spec/embed_graphics_spec.rb).
 
+Images and videos can be embed by adding their path into example's metadata. Check
+this [Sample Test](./spec/embed_graphics_spec.rb).
 
 ## Credits
-This library is forked from [kingsleyh/rspec_reports_formatter](https://github.com/kingsleyh/rspec_reports_formatter). Original Credits goes to *[kingsleyh](https://github.com/kingsleyh)*
+
+This library is forked from [kingsleyh/rspec_reports_formatter](https://github.com/kingsleyh/rspec_reports_formatter).
+Original Credits goes to *[kingsleyh](https://github.com/kingsleyh)*
