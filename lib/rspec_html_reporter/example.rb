@@ -1,4 +1,3 @@
-require 'rouge'
 require 'rspec_html_reporter/oopsy'
 
 class Example
