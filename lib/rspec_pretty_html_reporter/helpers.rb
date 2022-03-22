@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Helpers
+
+  ##
   # Appends a number to duplicate filename to avoid them being overwritten
   # by Specs with the same description.
   #
@@ -16,6 +18,7 @@ module Helpers
     filename
   end
 
+  ##
   # Appends a number to a duplicate description to avoid them being overwritten
   # by Specs with the same description.
   #
