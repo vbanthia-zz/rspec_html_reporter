@@ -19,7 +19,11 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency('rspec-core', '~>3.4')
 
   spec.add_development_dependency('byebug', '~> 11.1')
+  spec.add_development_dependency('capybara', '~> 3.36')
+  spec.add_development_dependency('rack', '~> 2.2.3')
+  spec.add_development_dependency('rake', '~> 13.0')
   spec.add_development_dependency('rdoc', '~> 6.4')
   spec.add_development_dependency('rspec', '~> 3.4.0')
   spec.add_development_dependency('turnip', '~> 2.0', '>= 2.0.2')
+  spec.add_development_dependency('webdrivers', '~> 5.0')
 end
