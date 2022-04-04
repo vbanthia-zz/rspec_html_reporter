@@ -2,7 +2,7 @@
 
 require 'rspec'
 
-describe 'example test' do
+describe 'Example Test' do
   it 'passes' do
     expect(true).to be(true)
   end

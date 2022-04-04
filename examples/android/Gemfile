@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'appium_lib'
 gem 'rake'
 gem 'rspec'
-gem 'rspec_html_reporter'
+gem 'rspec_pretty_html_reporter'
 
 group :development do
   gem 'pry'

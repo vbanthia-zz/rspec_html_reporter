@@ -2,7 +2,7 @@
 
 require 'rspec'
 
-describe 'example test' do
+describe 'Example Test' do
   it 'fails' do
     raise 'supposed to fail'
   end

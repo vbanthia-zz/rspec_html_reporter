@@ -8,9 +8,9 @@ describe 'Embed Graphics' do
 
     report_dir = RspecPrettyHtmlReporter::REPORT_PATH
 
-    FileUtils.cp './spec/support/assets/images/screen_1.png', "#{report_dir}/screenshots/"
-    FileUtils.cp './spec/support/assets/images/screen_2.png', "#{report_dir}/screenshots/"
-    FileUtils.cp './spec/support/assets/videos/screen_record.mp4', "#{report_dir}/screenrecords/"
+    FileUtils.cp "#{Bundler.root}/spec/support/assets/images/screen_1.png", "#{report_dir}/screenshots/"
+    FileUtils.cp "#{Bundler.root}/spec/support/assets/images/screen_2.png", "#{report_dir}/screenshots/"
+    FileUtils.cp "#{Bundler.root}/spec/support/assets/videos/screen_record.mp4", "#{report_dir}/screenrecords/"
   end
 
   context 'Screenshots' do

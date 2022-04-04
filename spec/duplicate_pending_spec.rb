@@ -2,7 +2,7 @@
 
 require 'rspec'
 
-describe 'example test' do
+describe 'Example Test' do
   # Intentional mistake to enable the specs shows as pending.
   xit 'is pending' do
     expect(true).to be(false)
