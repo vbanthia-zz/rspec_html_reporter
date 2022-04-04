@@ -1,9 +1,10 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'rspec_pretty_html_reporter/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'rspec_pretty_html_reporter'
-  spec.version       = '1.1.1'
+  spec.version       = RspecPrettyHtmlReporter::VERSION
   spec.authors       = ['Carlos Gutierrez']
   spec.email         = ['testing@spartan-testsolutions.co.uk']
   spec.summary       = 'RSpec Pretty HTML Reporter'
@@ -18,6 +19,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency('rouge', '~> 3.28')
   spec.add_runtime_dependency('rspec-core', '~>3.4')
 
+  spec.add_development_dependency('bundler', '~> 2.3')
   spec.add_development_dependency('byebug', '~> 11.1')
   spec.add_development_dependency('capybara', '~> 3.36')
   spec.add_development_dependency('rack', '~> 2.2.3')
