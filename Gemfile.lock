@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rspec_pretty_html_reporter (1.1.1)
+    rspec_pretty_html_reporter (1.1.2)
       activesupport (~> 7.0)
       rouge (~> 3.28)
       rspec-core (~> 3.4)
@@ -27,7 +27,7 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     childprocess (4.1.0)
-    concurrent-ruby (1.1.9)
+    concurrent-ruby (1.1.10)
     diff-lcs (1.5.0)
     gherkin (2.12.2)
       multi_json (~> 1.3)
@@ -87,6 +87,7 @@ PLATFORMS
   x86_64-darwin-21
 
 DEPENDENCIES
+  bundler (~> 2.3)
   byebug (~> 11.1)
   capybara (~> 3.36)
   rack (~> 2.2.3)
