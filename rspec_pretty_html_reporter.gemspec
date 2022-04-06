@@ -4,7 +4,7 @@ require 'rspec_pretty_html_reporter/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'rspec_pretty_html_reporter'
-  spec.version       = RspecPrettyHtmlReporter::VERSION
+  spec.version       = '1.1.2'
   spec.authors       = ['Carlos Gutierrez']
   spec.email         = ['testing@spartan-testsolutions.co.uk']
   spec.summary       = 'RSpec Pretty HTML Reporter'
