@@ -16,7 +16,7 @@ features to embed images and videos into the report providing better debugging i
 Add this to your Gemfile:
 
 ```rb
-gem 'rspec-pretty-html-reporter'
+gem 'rspec_pretty_html_reporter'
 ```
 
 ## Generating the report
