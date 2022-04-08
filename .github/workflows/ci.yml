@@ -26,10 +26,10 @@ jobs:
       - name: Run RSpec tests
         run: |
           cd test
-          bundle exec rspec -fd *_spec.rb
+          bundle exec rspec *_spec.rb
       - name: "Tar files"
         if: ${{ success() || failure() }}
-        run: tar -cvf rspec-tests-${{ matrix.ruby-version }}.tar test/reports
+        run: tar -cvf rspec-tests-${{ matrix.ruby-version }}.tar reports
       - uses: actions/upload-artifact@v2
         if: ${{ success() || failure() }}
         with:
