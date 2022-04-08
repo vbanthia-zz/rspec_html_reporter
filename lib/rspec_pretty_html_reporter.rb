@@ -6,10 +6,12 @@ require 'active_support/inflector'
 require 'fileutils'
 require 'erb'
 require 'rspec_pretty_html_reporter/example'
+require 'rspec_pretty_html_reporter/helpers'
 
 I18n.enforce_available_locales = false
 
 class RspecPrettyHtmlReporter < RSpec::Core::Formatters::BaseFormatter
+  include Helpers
   DEFAULT_REPORT_PATH = File.join(Bundler.root, 'reports', Time.now.strftime('%Y%m%d-%H%M%S'))
   REPORT_PATH = ENV['REPORT_PATH'] || DEFAULT_REPORT_PATH
 
@@ -48,8 +50,6 @@ class RspecPrettyHtmlReporter < RSpec::Core::Formatters::BaseFormatter
   end
 
   def example_passed(notification)
-    # require 'byebug'; byebug
-
     @group_example_success_count += 1
     @examples << Example.new(notification.example)
   end
@@ -68,8 +68,9 @@ class RspecPrettyHtmlReporter < RSpec::Core::Formatters::BaseFormatter
     @group_level -= 1
 
     if @group_level.zero?
+      @filename = Helpers.rename_duplicate_filename("#{REPORT_PATH}/#{notification.group.description.parameterize}.html")
 
-      File.open("#{REPORT_PATH}/#{notification.group.description.parameterize}.html", 'w') do |f|
+      File.open(@filename, 'w') do |f|
         @passed = @group_example_success_count
         @failed = @group_example_failure_count
         @pending = @group_example_pending_count
@@ -90,7 +91,6 @@ class RspecPrettyHtmlReporter < RSpec::Core::Formatters::BaseFormatter
 
         @total_group_examples = @passed + @failed + @pending
 
-
         class_map = { passed: 'success', failed: 'danger', pending: 'warning' }
         statuses = @examples.map(&:status)
         @status = if statuses.include?('failed')
@@ -98,7 +98,8 @@ class RspecPrettyHtmlReporter < RSpec::Core::Formatters::BaseFormatter
                   else
                     (statuses.include?('passed') ? 'passed' : 'pending')
                   end
-        @all_groups[notification.group.description.parameterize] = {
+        @spec_description = Helpers.rename_duplicate_description(@all_groups, notification.group.description.parameterize)
+        @all_groups[@spec_description] = {
           group: notification.group.description,
           examples: @examples.size,
           status: @status,
@@ -108,8 +109,7 @@ class RspecPrettyHtmlReporter < RSpec::Core::Formatters::BaseFormatter
           pending: statuses.select { |s| s == 'pending' },
           duration: @summary_duration
         }
-
-        @example_status = @all_groups[notification.group.description.parameterize][:klass]
+        @example_status = @all_groups[@spec_description][:klass]
 
         template_file = File.read("#{File.dirname(__FILE__)}/../templates/report.erb")
 

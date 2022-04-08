@@ -32,4 +32,5 @@ vendor
 .byebug_history
 .idea
 *.gem
-
+pkg
+Gemfile.lock
