@@ -50,8 +50,6 @@ class RspecPrettyHtmlReporter < RSpec::Core::Formatters::BaseFormatter
   end
 
   def example_passed(notification)
-    # require 'byebug'; byebug
-
     @group_example_success_count += 1
     @examples << Example.new(notification.example)
   end

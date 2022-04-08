@@ -1,5 +1,6 @@
 require 'rspec_pretty_html_reporter/oopsy'
 
+# Processes the array of example information for all of the example group that has been run
 class Example
   def self.load_spec_comments!(examples)
     examples.group_by(&:file_path).each do |file_path, file_examples|
@@ -7,8 +8,8 @@ class Example
 
       file_examples.zip(file_examples.rotate).each do |ex, next_ex|
         lexically_next = next_ex &&
-          next_ex.file_path == ex.file_path &&
-          next_ex.metadata[:line_number] > ex.metadata[:line_number]
+                         next_ex.file_path == ex.file_path &&
+                         next_ex.metadata[:line_number] > ex.metadata[:line_number]
         start_line_idx = ex.metadata[:line_number] - 1
         next_start_idx = (lexically_next ? next_ex.metadata[:line_number] : lines.size) - 1
         spec_lines = lines[start_line_idx...next_start_idx].select { |l| l.match(/#->/) }
@@ -21,7 +22,6 @@ class Example
               :metadata, :spec, :screenshots, :screenrecord, :failed_screenshot
 
   def initialize(example)
-
     @example_group = example.example_group.to_s
     @description = example.description
     @full_description = example.full_description
