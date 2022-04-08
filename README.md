@@ -1,6 +1,5 @@
 
-[![Gem Version](https://badge.fury.io/rb/rspec_pretty_html_reporter.svg)](https://badge.fury.io/rb/rspec_pretty_html_reporter)
-
+[![Gem Version](https://badge.fury.io/rb/rspec_pretty_html_reporter.svg)](https://badge.fury.io/rb/rspec_pretty_html_reporter) 
 [![CI](https://github.com/TheSpartan1980/rspec_pretty_html_reporter/actions/workflows/ci.yml/badge.svg)](https://github.com/TheSpartan1980/rspec_pretty_html_reporter/actions/workflows/ci.yml)
 
 # RSpec Pretty HTML Reporter
