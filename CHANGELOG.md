@@ -1,8 +1,12 @@
-## [Unreleased]
+## [1.1.2] - 2022-04-08
+
+- Fixed an issue where if there are specs that have the same description a result now appears for each spec rather than
+  just one
+- Created integration tests for the duplicate specs and overview
 
 ## [1.1.1] - 2022-03-21
 
-- Updated readme 
+- Updated readme
 
 ## [1.1.0] - 2022-03-21
 
