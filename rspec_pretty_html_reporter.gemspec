@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/TheSpartan1980/rspec_pretty_html_reporter'
   spec.licenses      = ['MIT']
 
-  spec.required_ruby_version = '>= 2.6.9'
+  spec.required_ruby_version = '>= 2.7.5'
   spec.files = Dir['{lib,resources,templates}/**/*', 'README*', 'LICENSE*'] & `git ls-files -z`.split("\0")
 
   spec.add_runtime_dependency('activesupport', '~> 7.0')
