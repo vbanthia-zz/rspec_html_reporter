@@ -33,3 +33,4 @@ vendor
 .idea
 *.gem
 pkg
+Gemfile.lock
