@@ -28,8 +28,8 @@ class RspecPrettyHtmlReporter < RSpec::Core::Formatters::BaseFormatter
     create_screenrecords_dir
     copy_resources
     @all_groups = {}
-
     @group_level = 0
+    @theme = Helpers.theme(ENV['THEME'])
   end
 
   def example_group_started(_notification)
