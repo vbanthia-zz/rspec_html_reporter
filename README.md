@@ -1,4 +1,3 @@
-
 [![Gem Version](https://badge.fury.io/rb/rspec_pretty_html_reporter.svg)](https://badge.fury.io/rb/rspec_pretty_html_reporter) 
 [![CI](https://github.com/TheSpartan1980/rspec_pretty_html_reporter/actions/workflows/ci.yml/badge.svg)](https://github.com/TheSpartan1980/rspec_pretty_html_reporter/actions/workflows/ci.yml)
 
@@ -39,6 +38,24 @@ This will create the reports in the `reports` directory.
 
 Images and videos can be embed by adding their path into example's metadata. For an example of how to do this, please
 check out this [Sample Test](./spec/embed_graphics_spec.rb).
+
+## Themes
+
+Yeti is the default theme for the report, however you can change the theme by using the environment
+variable `THEME=cerulean` in the terminal before you execute your tests. The example below illustrates how to use this
+variable with your tests:
+
+```bash
+THEME=sketchy bundle exec rspec 
+```
+
+The included themes you can choose from are:
+
+* cerulean
+* litera
+* materia
+* sketchy
+* spacelab
 
 ## Credits
 

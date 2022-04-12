@@ -1,3 +1,10 @@
+## [1.1.3] - 2022-04-12
+
+- Reports can generated using a selected theme
+- Added 2 new themes that can be selected
+- Created a helper to process theme selection
+- Updated the readme with instructions on how to change the theme
+
 ## [1.1.2] - 2022-04-08
 
 - Fixed an issue where if there are specs that have the same description a result now appears for each spec rather than
