@@ -1,4 +1,5 @@
-[![Gem Version](https://badge.fury.io/rb/rspec_pretty_html_reporter.svg)](https://badge.fury.io/rb/rspec_pretty_html_reporter)
+[![Gem Version](https://badge.fury.io/rb/rspec_pretty_html_reporter.svg)](https://badge.fury.io/rb/rspec_pretty_html_reporter) 
+[![CI](https://github.com/TheSpartan1980/rspec_pretty_html_reporter/actions/workflows/ci.yml/badge.svg)](https://github.com/TheSpartan1980/rspec_pretty_html_reporter/actions/workflows/ci.yml)
 
 # RSpec Pretty HTML Reporter
 
@@ -14,7 +15,7 @@ features to embed images and videos into the report providing better debugging i
 Add this to your Gemfile:
 
 ```rb
-gem 'rspec-pretty-html-reporter'
+gem 'rspec_pretty_html_reporter'
 ```
 
 ## Generating the report
