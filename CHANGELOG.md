@@ -1,4 +1,4 @@
-## [1.1.3] - 2022-04-**
+## [1.1.3] - 2022-04-12
 
 - Reports can generated using a selected theme
 - Added 2 new themes that can be selected
