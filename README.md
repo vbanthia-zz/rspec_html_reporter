@@ -8,7 +8,10 @@ Produce pretty [RSpec](http://rspec.info/) reports.
 This is a custom reporter for RSpec which generates pretty HTML reports showing the results of rspec tests. It has
 features to embed images and videos into the report providing better debugging information when a test fails.
 
-<img src="https://github.com/TheSpartan1980/rspec_pretty_html_reporter/blob/master/images/group_overview_report.png" width="80%"/>
+<img src="https://github.com/TheSpartan1980/rspec_pretty_html_reporter/blob/master/images/report_overview.png" width="50%"/>
+<img src="https://github.com/TheSpartan1980/rspec_pretty_html_reporter/blob/master/images/failing_example.png" width="50%"/>
+<img src="https://github.com/TheSpartan1980/rspec_pretty_html_reporter/blob/master/images/passing_example.png" width="50%"/>
+<img src="https://github.com/TheSpartan1980/rspec_pretty_html_reporter/blob/master/images/pending_example.png" width="50%"/>
 
 ## Setup
 
