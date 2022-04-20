@@ -1,6 +1,6 @@
 Feature: Report Overview
 
-  Example: A passing example
+  Example: The reports directory and HTML file are generated
     Given a report has been generated
     Then the reports directory is created
     And a file named "overview.html" is present
