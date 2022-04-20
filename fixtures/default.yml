@@ -1,0 +1,16 @@
+reports_dir: reports
+test_report_path: reports/cg-test
+back_link: Back to report overview
+group_column_names: ['#', 'Group', 'Duration', 'Pending', 'Failed', 'Passed', 'Status']
+overview_summary_results:  [['1', 'Example Test', '0', '1', '0', 'failed'],
+                            ['2', 'Example Test', '0', '0', '1', 'passed'],
+                            ['3', 'Example Test', '1', '0', '0', 'pending'],
+                            ['4', 'Embed Graphics', '3', '3', '3', 'failed'],
+                            ['5', 'RSpec HTML Reporter', '2', '3', '5', 'failed'],
+                            ['6', 'Shared Examples', '0', '1', '1', 'failed'],
+                            ['7', 'Turnip test cases', '1', '1', '1', 'failed'],
+                            ['', 'Total', '7', '9', '11']]
+example_test_failed: ['1', 'Example Test', '0', '1', '', 'failed']
+example_test_passed: ['1', 'Example Test', '0', '0', '1', 'passed']
+example_test_pending: ['1', 'Example Test', '1', '0', '0', 'pending']
+example_column_names: ['#', 'Example', 'Duration', 'Status']
