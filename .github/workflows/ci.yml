@@ -23,16 +23,14 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-      - name: Run RSpec tests
-        run: |
-          cd test
-          bundle exec rspec *_spec.rb
+      - name: Run Cucumber tests
+        run: bundle exec cucumber
       - name: "Tar files"
         if: ${{ success() || failure() }}
-        run: tar -cvf rspec-tests-${{ matrix.ruby-version }}.tar reports
+        run: tar -cvf cucumber-tests-${{ matrix.ruby-version }}.tar cucumber-results.html
       - uses: actions/upload-artifact@v2
         if: ${{ success() || failure() }}
         with:
-          name: rspec-tests-${{ matrix.ruby-version }}
-          path: rspec-tests-${{ matrix.ruby-version }}.tar
+          name: cucumber-tests-${{ matrix.ruby-version }}
+          path: cucumber-tests-${{ matrix.ruby-version }}.tar
           retention-days: 14
