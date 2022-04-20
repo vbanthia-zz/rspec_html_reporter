@@ -127,7 +127,7 @@ class RspecPrettyHtmlReporter < RSpec::Core::Formatters::BaseFormatter
       @pending = @overview.values.map { |g| g[:pending].size }.inject(0) { |sum, i| sum + i }
 
       duration_values = @overview.values.map { |e| e[:duration] }
-
+      @total_duration = duration_values.map { |d| d.to_f.round(5) }
       duration_keys = duration_values.size.times.to_a
       if duration_values.size < 2
         duration_values.unshift(duration_values.first)
