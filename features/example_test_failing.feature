@@ -18,9 +18,9 @@ Feature: Example Test - Failing
   Example: The Report table displays the correct results
     Given a report has been generated
     When I visit the page: "/example-test.html"
-    Then the example group in the Report table displays the correct results
+    Then the example group in the Report table displays the "failed" results
 
-  Example: The Report table displays the correct results
+  Example: The Example table displays the correct columns
     Given a report has been generated
     When I visit the page: "/example-test.html"
     Then the example table has the correct columns
@@ -28,7 +28,7 @@ Feature: Example Test - Failing
   Example: The title displayed in the example table is correct
     Given a report has been generated
     When I visit the page: "/example-test.html"
-    Then the title in the example table is correct
+    Then the title in the example table is "ExampleTest → fails"
 
   Example: The failure message is displayed in the example
     Given a report has been generated
