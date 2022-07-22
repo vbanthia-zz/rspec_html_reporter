@@ -1,4 +1,4 @@
-## [1.1.4] - 2022-04-20
+## [1.1.4] - 2022-07-22
 
 - Added a row for totals to the Report Overview table
 - Switched to using Cucumber for integration tests
