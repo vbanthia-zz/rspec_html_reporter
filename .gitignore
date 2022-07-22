@@ -34,3 +34,4 @@ vendor
 *.gem
 pkg
 Gemfile.lock
+cucumber-results.html

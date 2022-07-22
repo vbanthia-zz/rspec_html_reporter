@@ -1,15 +1,6 @@
-# frozen_string_literal: true
-
-require 'capybara/dsl'
-require 'capybara/rspec'
-require 'fig_newton'
-require 'rack'
-require 'rspec'
-require 'webdrivers'
-
 Capybara.configure do |config|
-  config.app_host = "file:///#{Bundler.root}/test/reports/cg-test"
-  config.default_max_wait_time = 5
+  config.app_host = "file:///#{Bundler.root}/reports/cg-test"
+  config.default_max_wait_time = 3
   config.default_selector = :css
   config.exact = true
   config.ignore_hidden_elements = true
@@ -27,9 +18,3 @@ Capybara.default_driver = case ENV['BROWSER']
                           else
                             :selenium_chrome_headless
                           end
-
-RSpec.configure do |config|
-  config.include Capybara::DSL
-end
-
-FigNewton.yml_directory = 'fixtures'

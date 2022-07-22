@@ -84,6 +84,14 @@
           </tr>
           <% i += 1 %>
         <% end %>
+        <tr>
+          <td></td>
+          <td><b>Total</b></td>
+          <td><b><%= @total_duration.sum.round(5) %></b></td>
+          <td class="alert-warning"><span><b><%= @pending %></b></span></td>
+          <td class="alert-danger"><span><b><%= @failed %></b></span></td>
+          <td class="alert-success"><span><b><%= @passed %></b></span></td>
+        </tr>
         </tbody>
       </table>
     </div>
