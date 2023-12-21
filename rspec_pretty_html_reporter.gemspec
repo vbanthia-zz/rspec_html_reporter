@@ -17,9 +17,9 @@ Gem::Specification.new do |spec|
   spec.files = Dir['{lib,resources,templates}/**/*', 'README*', 'LICENSE*'] & `git ls-files -z`.split("\0")
 
   spec.add_runtime_dependency('activesupport', '>= 4.1.4')
-  spec.add_runtime_dependency('bundler', '~> 2.3')
+  spec.add_runtime_dependency('bundler', '~> 2.2')
   spec.add_runtime_dependency('rouge', '~> 3.28')
-  spec.add_runtime_dependency('rspec-core', ['>=3.4', '<4.0'])
+  spec.add_runtime_dependency('rspec-core', %w[>=3.4 <4.0])
 
   spec.add_development_dependency('byebug', '~> 11.1')
   spec.add_development_dependency('capybara', '~> 3.36')
