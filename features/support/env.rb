@@ -6,7 +6,6 @@ require 'capybara/cucumber'
 require 'cucumber'
 require 'fig_newton'
 require 'selenium-webdriver'
-require 'webdrivers'
 require_relative 'test_helper'
 
 Fig = FigNewton
