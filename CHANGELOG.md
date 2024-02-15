@@ -1,3 +1,8 @@
+## [1.1.5] - 2024-02-15
+
+- Bumped required Ruby version to 3.0.6
+- Updated gem dependencies
+ 
 ## [1.1.4] - 2022-07-22
 
 - Added a row for totals to the Report Overview table
