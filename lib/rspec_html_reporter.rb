@@ -284,16 +284,16 @@ class RspecHtmlReporter < RSpec::Core::Formatters::BaseFormatter
 
   private
   def create_reports_dir
-    FileUtils.rm_rf(REPORT_PATH) if File.exists?(REPORT_PATH)
+    FileUtils.rm_rf(REPORT_PATH) if File.exist?(REPORT_PATH)
     FileUtils.mkpath(REPORT_PATH)
   end
 
   def create_screenshots_dir
-    FileUtils.mkdir_p SCREENSHOT_DIR unless File.exists?(SCREENSHOT_DIR)
+    FileUtils.mkdir_p SCREENSHOT_DIR unless File.exist?(SCREENSHOT_DIR)
   end
 
   def create_screenrecords_dir
-    FileUtils.mkdir_p SCREENRECORD_DIR unless File.exists?(SCREENRECORD_DIR)
+    FileUtils.mkdir_p SCREENRECORD_DIR unless File.exist?(SCREENRECORD_DIR)
   end
 
   def copy_resources
